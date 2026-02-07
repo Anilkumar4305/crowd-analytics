@@ -74,29 +74,33 @@ const switchTab = (tabName) => {
     tab.setAttribute('aria-selected', active ? 'true' : 'false');
   });
 
-  panels.forEach(panel => {
-    if (panel.id === tabName) {
-      panel.classList.add('active');
-      gsap.fromTo(panel, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' });
-    } else {
-      if (panel.classList.contains('active')) {
-        panel.classList.add('leaving');
-        setTimeout(() => {
-          panel.classList.remove('active', 'leaving');
-        }, 350);
+  try {
+    panels.forEach(panel => {
+      if (panel.id === tabName) {
+        panel.classList.add('active');
+        if (window.gsap) {
+          gsap.fromTo(panel, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' });
+        }
       } else {
-        panel.classList.remove('active');
+        if (panel.classList.contains('active')) {
+          panel.classList.add('leaving');
+          setTimeout(() => {
+            panel.classList.remove('active', 'leaving');
+          }, 350);
+        } else {
+          panel.classList.remove('active');
+        }
       }
-    }
-  });
+    });
+  } finally {
+    updateIndicator();
 
-  updateIndicator();
-
-  setTimeout(() => {
-    if (pageTransition) {
-      pageTransition.classList.remove('active');
-    }
-  }, 300);
+    setTimeout(() => {
+      if (pageTransition) {
+        pageTransition.classList.remove('active');
+      }
+    }, 300);
+  }
 };
 
 tabs.forEach(tab => {
