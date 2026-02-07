@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>High-Performance Density Map Regression | Adaptive Crowe Analytica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-ring"></div>
+    <div class="loader-text">Initializing AI Interface...</div>
+  </div>
+  <div class="page-transition" id="pageTransition" aria-hidden="true"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <canvas id="shaderBg" aria-hidden="true"></canvas>
+  <div id="particles-js" aria-hidden="true"></div>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-grid-perspective" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+  <div class="bg-orb orb-1" aria-hidden="true"></div>
+  <div class="bg-orb orb-2" aria-hidden="true"></div>
+  <div class="bg-orb orb-3" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo logo-anim">HP</div>
+      <div class="brand-text">
+        <span class="brand-title">High-Performance Density Map Regression</span>
+        <span class="brand-sub">Adaptive Crowe Analytica</span>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Primary">
+      <span class="tab-indicator" aria-hidden="true"></span>
+      <button class="tab active" role="tab" aria-selected="true" data-tab="home">Home</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="scope">Scope</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="team">Team</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="about">About</button>
+    </nav>
+    <button class="ghost-btn">Request Demo</button>
+  </header>
+
+  <main>
+    <section id="home" class="panel active" role="tabpanel">
+      <div class="hero">
+        <div class="hero-left">
+          <p class="eyebrow hero-seq" data-aos="fade-up">Futuristic AI Lab Interface</p>
+          <h1 class="hero-title hero-seq" id="heroTitle" data-text="High-Performance Density Map Regression for Adaptive Crowd Analytics" aria-label="High-Performance Density Map Regression for Adaptive Crowd Analytics"></h1>
+          <p class="hero-subtitle hero-seq" id="heroSubtitle" data-aos="fade-up" data-aos-delay="100">
+            Deep Learning system that estimates crowd density and population using visual data.
+          </p>
+
+          <div class="glass-info hero-seq" id="glassInfo" aria-live="polite" data-aos="fade-up" data-aos-delay="200">
+            <div class="info-line">Model Type: Deep Learning Regression</div>
+            <div class="info-line">Core Method: Density Map Estimation</div>
+            <div class="info-line">Output: Crowd Count Prediction</div>
+            <div class="info-line">Input: Image / Video Streams</div>
+          </div>
+
+          <div class="live-stats hero-seq" id="liveStats" data-aos="fade-up" data-aos-delay="300">
+            <div class="live-card">
+              <span class="live-label">Frames Processed</span>
+              <span class="live-value" data-counter data-target="48216">0</span>
+            </div>
+            <div class="live-card">
+              <span class="live-label">Density Regions Mapped</span>
+              <span class="live-value" data-counter data-target="1284">0</span>
+            </div>
+            <div class="live-card">
+              <span class="live-label">Prediction Accuracy</span>
+              <span class="live-value" data-counter data-target="96.4" data-decimals="1" data-suffix="%">0</span>
+            </div>
+          </div>
+
+          <div class="hero-actions hero-seq" data-aos="fade-up" data-aos-delay="400">
+            <button class="primary-btn" id="uploadTrigger">Upload Crowd Data</button>
+            <button class="outline-btn" id="scopeTrigger">View Research Scope</button>
+          </div>
+        </div>
+
+        <div class="hero-right hero-seq" data-aos="fade-left">
+          <div class="glass-card">
+            <div class="card-head">
+              <div class="pulse"></div>
+              <span>Live Density Field</span>
+            </div>
+            <canvas id="densityCanvas" width="520" height="360" aria-label="3D density map"></canvas>
+            <div class="card-footer">
+              <span>Adaptive pseudo-3D rendering</span>
+              <span class="mono">FPS: <span id="fps">60</span></span>
+            </div>
+          </div>
+
+          <div class="upload-panel" id="uploadPanel">
+            <div class="upload-header">
+              <h3>Upload Dataset</h3>
+              <p>Images or videos for density regression analysis.</p>
+            </div>
+            <div class="drop-zone" id="dropZone">
+              <input type="file" id="fileInput" multiple accept="image/*,video/*" />
+              <div class="drop-content">
+                <span class="drop-title">Drag & drop files here</span>
+                <span class="drop-sub">or browse from device</span>
+              </div>
+            </div>
+            <div class="upload-meta">
+              <span class="mono">Supported: JPG, PNG, MP4, MOV</span>
+              <button class="mini-btn" id="simulateBtn">Simulate Run</button>
+            </div>
+            <div class="upload-status" id="uploadStatus">
+              <div class="status-row">
+                <span class="status-label">Pipeline</span>
+                <span class="status-value" id="pipelineState">Idle</span>
+              </div>
+              <div class="status-row">
+                <span class="status-label">Avg. Count</span>
+                <span class="status-value" id="avgCount">--</span>
+              </div>
+              <div class="status-row">
+                <span class="status-label">Confidence</span>
+                <span class="status-value" id="confidence">--</span>
+              </div>
+              <div class="progress" aria-hidden="true">
+                <div class="progress-bar" id="progressBar"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-indicator" aria-hidden="true">
+        <div class="scroll-mouse"></div>
+        <span>Scroll</span>
+      </div>
+    </section>
+
+    <section id="ai-demo" class="ai-demo" aria-labelledby="ai-demo-title">
+      <div class="ai-demo-bg" aria-hidden="true"></div>
+      <div class="ai-demo-shell">
+        <header class="ai-demo-header" data-aos="fade-up">
+          <p class="eyebrow">AI System Demo</p>
+          <h2 id="ai-demo-title">AI Upload + Processing Experience</h2>
+          <p class="ai-demo-sub">Real-time density analysis with a cinematic deep-learning pipeline.</p>
+        </header>
+
+        <div class="ai-stage" id="aiStage" data-aos="fade-up" data-aos-delay="150">
+          <div class="ai-upload-card is-active" id="aiUpload">
+            <div class="upload-glow" aria-hidden="true"></div>
+            <div class="upload-icon" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+            </div>
+            <h3>Upload Visual Crowd Data</h3>
+            <p>Supports images and videos for AI-based density analysis</p>
+            <div class="upload-formats">
+              <span class="format-pill">Image</span>
+              <span class="format-pill">Video</span>
+            </div>
+            <label class="upload-action">
+              <input type="file" id="aiUploadInput" accept="image/*,video/*" />
+              <span>Drag & Drop or Browse</span>
+            </label>
+          </div>
+
+          <div class="ai-processing" id="aiProcessing">
+            <div class="processing-left">
+              <canvas id="nnCanvas" width="420" height="280" aria-label="Neural network visualization"></canvas>
+              <div class="nn-caption">Neural inference stream</div>
+            </div>
+            <div class="processing-right">
+              <h3>AI Analysis in Progress</h3>
+              <div class="process-steps">
+                <div class="process-step" data-step="0">
+                  <span class="step-indicator"></span>
+                  <div>
+                    <strong>Frame Extraction</strong>
+                    <p>Sampling temporal frames from input.</p>
+                  </div>
+                </div>
+                <div class="process-step" data-step="1">
+                  <span class="step-indicator"></span>
+                  <div>
+                    <strong>Feature Encoding</strong>
+                    <p>Embedding visual cues into latent space.</p>
+                  </div>
+                </div>
+                <div class="process-step" data-step="2">
+                  <span class="step-indicator"></span>
+                  <div>
+                    <strong>Density Mapping</strong>
+                    <p>Generating calibrated heatmap layers.</p>
+                  </div>
+                </div>
+                <div class="process-step" data-step="3">
+                  <span class="step-indicator"></span>
+                  <div>
+                    <strong>Prediction Output</strong>
+                    <p>Converging regression to count estimate.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ai-progress">
+                <div class="ai-progress-label" id="aiProgressLabel">Initializing feature encoder…</div>
+                <div class="ai-progress-bar">
+                  <div class="ai-progress-fill" id="aiProgressFill"></div>
+                  <div class="ai-progress-pulse"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ai-result" id="aiResult">
+            <div class="result-panel">
+              <span class="result-tag">Input Media</span>
+              <div class="result-media">
+                <img id="aiResultImage" alt="Uploaded input" />
+                <video id="aiResultVideo" muted playsinline></video>
+              </div>
+            </div>
+            <div class="result-panel result-metrics">
+              <span class="result-tag">Estimated Crowd Count</span>
+              <div class="result-count" id="aiResultCount">0</div>
+              <div class="result-details">
+                <div>AI Confidence Score: <strong id="aiConfidence">--</strong></div>
+                <div>Processing Time: <strong id="aiTime">--</strong></div>
+                <div>Model Version: <strong>v2.1</strong></div>
+              </div>
+              <div class="confidence-bar">
+                <div class="confidence-fill" id="aiConfidenceFill"></div>
+              </div>
+              <button class="outline-btn download-btn">Download Result</button>
+            </div>
+            <div class="result-panel">
+              <span class="result-tag">Density Heatmap</span>
+              <div class="heatmap-box">
+                <div class="heatmap-layer"></div>
+                <div class="heatmap-spark"></div>
+              </div>
+            </div>
+            <button class="outline-btn reset-btn" id="aiReset">Run Another</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="scope" class="panel" role="tabpanel">
+      <div class="scope-vision" id="scopeVision" data-aos="fade-up">
+        <div class="scope-header">
+          <h2>Future Scope & Scalability of Crowd Analytics System</h2>
+          <p>Extending AI-powered density estimation to real-world intelligent environments.</p>
+        </div>
+
+        <div class="scope-grid-vision">
+          <article class="scope-card-vision" data-scope="0">
+            <div class="scope-icon-vision">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <path d="M10 44h44" stroke="currentColor" stroke-width="2"/>
+                <path d="M14 44V30h8v14" stroke="currentColor" stroke-width="2"/>
+                <path d="M26 44V22h12v22" stroke="currentColor" stroke-width="2"/>
+                <path d="M42 44V26h8v18" stroke="currentColor" stroke-width="2"/>
+                <circle class="city-node" cx="18" cy="28" r="2"/>
+                <circle class="city-node" cx="32" cy="20" r="2"/>
+                <circle class="city-node" cx="46" cy="24" r="2"/>
+                <path class="city-line" d="M18 28 L32 20 L46 24" stroke="currentColor" stroke-width="1.5" fill="none"/>
+              </svg>
+            </div>
+            <h3>Smart Cities</h3>
+            <p>AI-powered crowd density monitoring for traffic flow optimization, urban planning, and infrastructure load balancing.</p>
+          </article>
+
+          <article class="scope-card-vision" data-scope="1">
+            <div class="scope-icon-vision">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <path d="M10 40c8-10 36-10 44 0" stroke="currentColor" stroke-width="2" fill="none"/>
+                <circle cx="20" cy="30" r="3"/>
+                <circle cx="32" cy="28" r="4"/>
+                <circle cx="44" cy="30" r="3"/>
+                <circle class="event-pulse" cx="32" cy="36" r="12" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <h3>Event Monitoring</h3>
+            <p>Real-time crowd estimation for concerts, sports events, and public gatherings to prevent overcrowding.</p>
+          </article>
+
+          <article class="scope-card-vision" data-scope="2">
+            <div class="scope-icon-vision">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <path d="M12 12h40v40H12z" stroke="currentColor" stroke-width="2" fill="none"/>
+                <path class="alert-scan" d="M12 28h40" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M32 18l10 18H22l10-18z" fill="currentColor"/>
+              </svg>
+            </div>
+            <h3>Disaster Management</h3>
+            <p>Rapid crowd density analysis in emergency zones to assist evacuation planning and rescue operations.</p>
+          </article>
+
+          <article class="scope-card-vision" data-scope="3">
+            <div class="scope-icon-vision">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <path d="M32 10l20 8v12c0 12-9 20-20 24-11-4-20-12-20-24V18l20-8z" stroke="currentColor" stroke-width="2" fill="none"/>
+                <circle class="radar-ring" cx="32" cy="30" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <path class="radar-sweep" d="M32 30 L50 26" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <h3>Public Safety</h3>
+            <p>AI surveillance support for public safety systems, anomaly detection, and risk prevention.</p>
+          </article>
+        </div>
+
+        <div class="scope-network">
+          <div class="network-title">Scalability Pipeline</div>
+          <svg viewBox="0 0 680 120" aria-hidden="true">
+            <circle cx="60" cy="60" r="20"/>
+            <circle cx="240" cy="60" r="20"/>
+            <circle cx="420" cy="60" r="20"/>
+            <circle cx="600" cy="60" r="20"/>
+            <path class="net-line" d="M80 60H220"/>
+            <path class="net-line" d="M260 60H400"/>
+            <path class="net-line" d="M440 60H580"/>
+          </svg>
+          <div class="network-labels">
+            <span>Camera Grid</span>
+            <span>Edge Server</span>
+            <span>AI Model</span>
+            <span>Operations Dashboard</span>
+          </div>
+        </div>
+
+        <div class="scope-tags">
+          <span class="scope-tag">Multi-Camera Integration</span>
+          <span class="scope-tag">Edge AI Deployment</span>
+          <span class="scope-tag">Cloud-Based Scaling</span>
+          <span class="scope-tag">Real-Time Analytics APIs</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="team" class="panel" role="tabpanel">
+      <div class="team-vision" id="teamVision" data-aos="fade-up">
+        <div class="team-header">
+          <h2>The Research Team Behind the System</h2>
+          <p>Interdisciplinary team developing AI-driven crowd analytics solutions.</p>
+        </div>
+
+        <div class="team-grid-vision">
+          <article class="team-card-vision" data-tilt>
+            <div class="team-glow" aria-hidden="true"></div>
+            <div class="team-photo">
+              <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=500&q=80" alt="Team member portrait" />
+            </div>
+            <div class="team-body">
+              <h3>Member One</h3>
+              <span class="role-badge">Deep Learning Engineer</span>
+              <p class="contrib">Density Map Modeling</p>
+              <div class="skill-aura">
+                <div class="skill">
+                  <span>Deep Learning</span>
+                  <div class="bar"><div style="width: 92%"></div></div>
+                </div>
+                <div class="skill">
+                  <span>Computer Vision</span>
+                  <div class="bar"><div style="width: 88%"></div></div>
+                </div>
+                <div class="skill">
+                  <span>Data Processing</span>
+                  <div class="bar"><div style="width: 82%"></div></div>
+                </div>
+                <div class="skill">
+                  <span>UI Engineering</span>
+                  <div class="bar"><div style="width: 68%"></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="team-links">
+              <button class="icon-btn" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm.02 6.5H3V21h2V10Zm6 0H8v11h3v-5.5c0-3 4-3.2 4 0V21h3v-6.2c0-5.1-5.8-4.9-7-2.4V10Z"/></svg>
+              </button>
+              <button class="icon-btn" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C6.5 2 2 6.6 2 12.3c0 4.6 2.9 8.5 6.9 9.9.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.5-1.4-1.2-1.7-1.2-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1.1 1.2 2.8.8.1-.8.4-1.2.7-1.5-2.2-.2-4.5-1.2-4.5-5.2 0-1.1.4-2.1 1-2.8-.1-.2-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.1 9.1 0 0 1 5 0c2-1.3 2.8-1 2.8-1 .6 1.4.2 2.5.1 2.7.6.7 1 1.7 1 2.8 0 4-2.3 5-4.5 5.2.4.3.8 1 .8 2.1v3.1c0 .3.2.6.7.5 4-1.4 6.9-5.3 6.9-9.9C22 6.6 17.5 2 12 2Z"/></svg>
+              </button>
+            </div>
+          </article>
+
+          <article class="team-card-vision" data-tilt>
+            <div class="team-glow" aria-hidden="true"></div>
+            <div class="team-photo">
+              <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=500&q=80" alt="Team member portrait" />
+            </div>
+            <div class="team-body">
+              <h3>Member Two</h3>
+              <span class="role-badge">Frontend System Designer</span>
+              <p class="contrib">Frontend System Architecture</p>
+              <div class="skill-aura">
+                <div class="skill">
+                  <span>UI Engineering</span>
+                  <div class="bar"><div style="width: 90%"></div></div>
+                </div>
+                <div class="skill">
+                  <span>Data Visualization</span>
+                  <div class="bar"><div style="width: 84%"></div></div>
+                </div>
+                <div class="skill">
+                  <span>Interaction Design</span>
+                  <div class="bar"><div style="width: 88%"></div></div>
+                </div>
+                <div class="skill">
+                  <span>Systems UX</span>
+                  <div class="bar"><div style="width: 76%"></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="team-links">
+              <button class="icon-btn" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm.02 6.5H3V21h2V10Zm6 0H8v11h3v-5.5c0-3 4-3.2 4 0V21h3v-6.2c0-5.1-5.8-4.9-7-2.4V10Z"/></svg>
+              </button>
+              <button class="icon-btn" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C6.5 2 2 6.6 2 12.3c0 4.6 2.9 8.5 6.9 9.9.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.5-1.4-1.2-1.7-1.2-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1.1 1.2 2.8.8.1-.8.4-1.2.7-1.5-2.2-.2-4.5-1.2-4.5-5.2 0-1.1.4-2.1 1-2.8-.1-.2-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.1 9.1 0 0 1 5 0c2-1.3 2.8-1 2.8-1 .6 1.4.2 2.5.1 2.7.6.7 1 1.7 1 2.8 0 4-2.3 5-4.5 5.2.4.3.8 1 .8 2.1v3.1c0 .3.2.6.7.5 4-1.4 6.9-5.3 6.9-9.9C22 6.6 17.5 2 12 2Z"/></svg>
+              </button>
+            </div>
+          </article>
+
+          <article class="team-card-vision" data-tilt>
+            <div class="team-glow" aria-hidden="true"></div>
+            <div class="team-photo">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80" alt="Team member portrait" />
+            </div>
+            <div class="team-body">
+              <h3>Member Three</h3>
+              <span class="role-badge">Model Optimization Lead</span>
+              <p class="contrib">Data Pipeline Integration</p>
+              <div class="skill-aura">
+                <div class="skill">
+                  <span>Model Optimization</span>
+                  <div class="bar"><div style="width: 90%"></div></div>
+                </div>
+                <div class="skill">
+                  <span>Edge AI</span>
+                  <div class="bar"><div style="width: 80%"></div></div>
+                </div>
+                <div class="skill">
+                  <span>ML Ops</span>
+                  <div class="bar"><div style="width: 78%"></div></div>
+                </div>
+                <div class="skill">
+                  <span>Monitoring</span>
+                  <div class="bar"><div style="width: 72%"></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="team-links">
+              <button class="icon-btn" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm.02 6.5H3V21h2V10Zm6 0H8v11h3v-5.5c0-3 4-3.2 4 0V21h3v-6.2c0-5.1-5.8-4.9-7-2.4V10Z"/></svg>
+              </button>
+              <button class="icon-btn" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C6.5 2 2 6.6 2 12.3c0 4.6 2.9 8.5 6.9 9.9.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.5-1.4-1.2-1.7-1.2-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1.1 1.2 2.8.8.1-.8.4-1.2.7-1.5-2.2-.2-4.5-1.2-4.5-5.2 0-1.1.4-2.1 1-2.8-.1-.2-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.1 9.1 0 0 1 5 0c2-1.3 2.8-1 2.8-1 .6 1.4.2 2.5.1 2.7.6.7 1 1.7 1 2.8 0 4-2.3 5-4.5 5.2.4.3.8 1 .8 2.1v3.1c0 .3.2.6.7.5 4-1.4 6.9-5.3 6.9-9.9C22 6.6 17.5 2 12 2Z"/></svg>
+              </button>
+            </div>
+          </article>
+
+          <article class="team-card-vision" data-tilt>
+            <div class="team-glow" aria-hidden="true"></div>
+            <div class="team-photo">
+              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=500&q=80" alt="Team member portrait" />
+            </div>
+            <div class="team-body">
+              <h3>Member Four</h3>
+              <span class="role-badge">Research Analyst</span>
+              <p class="contrib">Evaluation & Reporting</p>
+              <div class="skill-aura">
+                <div class="skill">
+                  <span>Research Methods</span>
+                  <div class="bar"><div style="width: 88%"></div></div>
+                </div>
+                <div class="skill">
+                  <span>Data Analysis</span>
+                  <div class="bar"><div style="width: 82%"></div></div>
+                </div>
+                <div class="skill">
+                  <span>Visualization</span>
+                  <div class="bar"><div style="width: 78%"></div></div>
+                </div>
+                <div class="skill">
+                  <span>Documentation</span>
+                  <div class="bar"><div style="width: 90%"></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="team-links">
+              <button class="icon-btn" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm.02 6.5H3V21h2V10Zm6 0H8v11h3v-5.5c0-3 4-3.2 4 0V21h3v-6.2c0-5.1-5.8-4.9-7-2.4V10Z"/></svg>
+              </button>
+              <button class="icon-btn" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C6.5 2 2 6.6 2 12.3c0 4.6 2.9 8.5 6.9 9.9.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.5-1.4-1.2-1.7-1.2-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 .1.1 1.2 2.8.8.1-.8.4-1.2.7-1.5-2.2-.2-4.5-1.2-4.5-5.2 0-1.1.4-2.1 1-2.8-.1-.2-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.1 9.1 0 0 1 5 0c2-1.3 2.8-1 2.8-1 .6 1.4.2 2.5.1 2.7.6.7 1 1.7 1 2.8 0 4-2.3 5-4.5 5.2.4.3.8 1 .8 2.1v3.1c0 .3.2.6.7.5 4-1.4 6.9-5.3 6.9-9.9C22 6.6 17.5 2 12 2Z"/></svg>
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="panel" role="tabpanel">
+      <div class="about-research about-2" id="aboutResearch" data-aos="fade-up">
+        <div class="about-header">
+          <h2>System Overview & Research Foundation</h2>
+          <p>Deep Learning-based Density Map Regression for Adaptive Crowd Analytics.</p>
+        </div>
+
+        <div class="research-flow">
+          <article class="research-block story-block">
+            <div class="block-title">Problem → Solution</div>
+            <div class="story-stage">
+              <div class="story-panel chaos">
+                <div class="story-visual">
+                  <span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <p>Traditional crowd counting fails in dense scenes…</p>
+              </div>
+              <div class="story-panel solution">
+                <div class="story-visual heatmap">
+                  <div class="heat-layer"></div>
+                </div>
+                <p>Density Map Regression enables pixel-level crowd estimation.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="research-block">
+            <div class="block-title">Interactive Model Pipeline</div>
+            <div class="pipeline-interactive">
+              <div class="pipe-node" data-tip="Ingests raw visual frames">Input</div>
+              <div class="pipe-node" data-tip="Extracts spatial crowd features">CNN Layers</div>
+              <div class="pipe-node" data-tip="Highlights density cues">Feature Maps</div>
+              <div class="pipe-node" data-tip="Regresses pixel density">Regression Head</div>
+              <div class="pipe-node" data-tip="Generates heat distribution">Density Map</div>
+              <div class="pipe-node" data-tip="Aggregates count estimate">Count Output</div>
+              <div class="pipe-flow"></div>
+            </div>
+          </article>
+
+          <article class="research-block">
+            <div class="block-title">Architecture Depth</div>
+            <div class="arch-3d">
+              <div class="cube">
+                <div class="face front">Input</div>
+                <div class="face back">Output</div>
+                <div class="face right">Layers</div>
+                <div class="face left">Features</div>
+                <div class="face top">Depth</div>
+                <div class="face bottom">Resolution</div>
+              </div>
+              <div class="arch-meta">
+                <span>Input Resolution: 512×512</span>
+                <span>Layer Depth: 12</span>
+                <span>Output Density Map: 128×128</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="research-block">
+            <div class="block-title">Technology Stack</div>
+            <div class="tech-grid">
+              <div class="tech-card">
+                <h4>Frontend</h4>
+                <span>HTML • CSS • JavaScript</span>
+              </div>
+              <div class="tech-card">
+                <h4>Backend</h4>
+                <span>Flask • Python</span>
+              </div>
+              <div class="tech-card">
+                <h4>AI</h4>
+                <span>Deep Learning • CNN • Computer Vision</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="research-block">
+            <div class="block-title">Results & Performance</div>
+            <div class="metrics-grid">
+              <div class="metric-card">
+                <span>Density Accuracy</span>
+                <div class="gauge"></div>
+              </div>
+              <div class="metric-card">
+                <span>Processing Speed</span>
+                <div class="line-meter">
+                  <div class="line-fill"></div>
+                </div>
+              </div>
+              <div class="metric-card">
+                <span>Model Efficiency</span>
+                <div class="bar-meter">
+                  <div class="bar-fill"></div>
+                </div>
+              </div>
+            </div>
+            <p class="block-text">Robust performance in varied crowd densities with stable inference under real-time constraints.</p>
+          </article>
+
+          <article class="research-block">
+            <div class="block-title">Applications in the Real World</div>
+            <div class="apps-scroll">
+              <div class="app-card">Smart Cities</div>
+              <div class="app-card">Event Monitoring</div>
+              <div class="app-card">Disaster Response</div>
+              <div class="app-card">Public Safety</div>
+            </div>
+          </article>
+
+          <article class="research-block">
+            <div class="block-title">Model Pipeline Diagram</div>
+            <div class="pipeline-diagram">
+              <span>Camera Input</span>
+              <span>Preprocessing</span>
+              <span>Feature Extraction</span>
+              <span>Regression Network</span>
+              <span>Density Output</span>
+              <span>Count</span>
+              <div class="pipeline-flow"></div>
+            </div>
+          </article>
+
+          <article class="research-block contributions">
+            <div class="block-title">Research Contributions</div>
+            <div class="contrib-grid">
+              <div class="contrib-card">Real-time density regression pipeline</div>
+              <div class="contrib-card">Adaptive crowd scaling</div>
+              <div class="contrib-card">Integration-ready system architecture</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>AI Research Lab Interface • 2026</span>
+    <span class="mono">Adaptive Crowe Analytica Lab</span>
+  </footer>
+
+  <div class="overlay" id="overlay" aria-hidden="true">
+    <div class="overlay-card">
+      <h3>Pipeline Preview</h3>
+      <p>Upload data to generate an estimated average crowd count based on density regression.</p>
+      <div class="timeline">
+        <div class="tick">
+          <span class="tick-title">Ingest</span>
+          <span class="tick-sub">Normalize data</span>
+        </div>
+        <div class="tick">
+          <span class="tick-title">Regress</span>
+          <span class="tick-sub">Density map prediction</span>
+        </div>
+        <div class="tick">
+          <span class="tick-title">Aggregate</span>
+          <span class="tick-sub">Average count output</span>
+        </div>
+      </div>
+      <button class="primary-btn" id="closeOverlay">Close</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lottie-web@5.12.2/build/player/lottie.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.0/dist/vanilla-tilt.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/countup.js@2.8.0/dist/countUp.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
