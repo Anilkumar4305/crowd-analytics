@@ -2396,3 +2396,116 @@ main {
     gap: 6px;
   }
 }
+
+@media (max-width: 700px) {
+  main {
+    padding: 28px 4vw 60px;
+  }
+
+  .topbar {
+    padding: 16px 4vw;
+  }
+
+  .tabs {
+    width: 100%;
+    gap: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab {
+    padding: 6px 12px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .tab-indicator {
+    top: 5px;
+    left: 5px;
+    height: calc(100% - 10px);
+  }
+
+  .ghost-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero {
+    gap: 24px;
+  }
+
+  .hero-title {
+    font-size: clamp(26px, 8vw, 36px);
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .primary-btn,
+  .outline-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  #densityCanvas {
+    height: 240px;
+  }
+
+  .ai-stage {
+    padding: 22px;
+  }
+
+  .ai-processing {
+    gap: 18px;
+  }
+
+  #nnCanvas {
+    height: 220px;
+  }
+
+  .model-visual {
+    grid-template-columns: 1fr;
+  }
+
+  .model-visual .arrow {
+    height: 1px;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar {
+    gap: 12px;
+  }
+
+  .logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+  }
+
+  .brand-title {
+    font-size: 12px;
+  }
+
+  .brand-sub {
+    font-size: 10px;
+  }
+
+  .glass-card {
+    padding: 14px;
+  }
+
+  .upload-panel {
+    padding: 14px;
+  }
+
+  .overlay-card {
+    padding: 18px;
+  }
+}
