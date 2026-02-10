@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="High-performance density map regression for adaptive crowd analytics using deep learning." />
+  <title>High-Performance Density Map Regression | Adaptive Crowd Analytica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-ring"></div>
+    <div class="loader-text">Initializing AI Interface...</div>
+  </div>
+  <div class="page-transition" id="pageTransition" aria-hidden="true"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <canvas id="shaderBg" aria-hidden="true"></canvas>
+  <div id="particles-js" aria-hidden="true"></div>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-grid-perspective" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+  <div class="bg-orb orb-1" aria-hidden="true"></div>
+  <div class="bg-orb orb-2" aria-hidden="true"></div>
+  <div class="bg-orb orb-3" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo logo-anim">HP</div>
+      <div class="brand-text">
+        <span class="brand-title">High-Performance Density Map Regression</span>
+        <span class="brand-sub">Adaptive Crowd Analytica</span>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Primary">
+      <span class="tab-indicator" aria-hidden="true"></span>
+      <a class="tab active" role="tab" aria-selected="true" href="/templates/home.html">Home</a>
+      <a class="tab" role="tab" aria-selected="false" href="/templates/scope.html">Scope</a>
+      <a class="tab" role="tab" aria-selected="false" href="/templates/team.html">Team</a>
+      <a class="tab" role="tab" aria-selected="false" href="/templates/about.html">About</a>
+    </nav>
+    <button class="ghost-btn">Request Demo</button>
+  </header>
+
+  <main>
+    <section id="home" class="panel active" role="tabpanel">
+      <div class="hero">
+        <div class="hero-left">
+          <p class="eyebrow hero-seq" data-aos="fade-up">Futuristic AI Lab Interface</p>
+          <h1 class="hero-title hero-seq" id="heroTitle" data-text="High-Performance Density Map Regression for Adaptive Crowd Analytics" aria-label="High-Performance Density Map Regression for Adaptive Crowd Analytics"></h1>
+          <p class="hero-subtitle hero-seq" id="heroSubtitle" data-aos="fade-up" data-aos-delay="100">
+            Deep Learning system that estimates crowd density and population using visual data.
+          </p>
+
+          <div class="glass-info hero-seq" id="glassInfo" aria-live="polite" data-aos="fade-up" data-aos-delay="200">
+            <div class="info-line">Model Type: Deep Learning Regression</div>
+            <div class="info-line">Core Method: Density Map Estimation</div>
+            <div class="info-line">Output: Crowd Count Prediction</div>
+            <div class="info-line">Input: Image / Video Streams</div>
+          </div>
+
+          <div class="live-stats hero-seq" id="liveStats" data-aos="fade-up" data-aos-delay="300">
+            <div class="live-card">
+              <span class="live-label">Frames Processed</span>
+              <span class="live-value" data-counter data-target="48216">0</span>
+            </div>
+            <div class="live-card">
+              <span class="live-label">Density Regions Mapped</span>
+              <span class="live-value" data-counter data-target="1284">0</span>
+            </div>
+            <div class="live-card">
+              <span class="live-label">Prediction Accuracy</span>
+              <span class="live-value" data-counter data-target="96.4" data-decimals="1" data-suffix="%">0</span>
+            </div>
+          </div>
+
+          <div class="hero-actions hero-seq" data-aos="fade-up" data-aos-delay="400">
+            <button class="primary-btn" id="uploadTrigger">Upload Crowd Data</button>
+            <button class="outline-btn" id="scopeTrigger">View Research Scope</button>
+          </div>
+        </div>
+
+        <div class="hero-right hero-seq" data-aos="fade-left">
+          <div class="glass-card">
+            <div class="card-head">
+              <div class="pulse"></div>
+              <span>Live Density Field</span>
+            </div>
+            <canvas id="densityCanvas" width="520" height="360" aria-label="3D density map"></canvas>
+            <div class="card-footer">
+              <span>Adaptive pseudo-3D rendering</span>
+              <span class="mono">FPS: <span id="fps">60</span></span>
+            </div>
+          </div>
+
+          <div class="upload-panel" id="uploadPanel">
+            <div class="upload-header">
+              <h3>Upload Dataset</h3>
+              <p>Images or videos for density regression analysis.</p>
+            </div>
+            <div class="drop-zone" id="dropZone">
+              <input type="file" id="fileInput" multiple accept="image/*,video/*" />
+              <div class="drop-content">
+                <span class="drop-title">Drag & drop files here</span>
+                <span class="drop-sub">or browse from device</span>
+              </div>
+            </div>
+            <div class="upload-meta">
+              <span class="mono">Supported: JPG, PNG, MP4, MOV</span>
+              <button class="mini-btn" id="simulateBtn">Simulate Run</button>
+            </div>
+            <div class="upload-status" id="uploadStatus">
+              <div class="status-row">
+                <span class="status-label">Pipeline</span>
+                <span class="status-value" id="pipelineState">Idle</span>
+              </div>
+              <div class="status-row">
+                <span class="status-label">Avg. Count</span>
+                <span class="status-value" id="avgCount">--</span>
+              </div>
+              <div class="status-row">
+                <span class="status-label">Confidence</span>
+                <span class="status-value" id="confidence">--</span>
+              </div>
+              <div class="progress" aria-hidden="true">
+                <div class="progress-bar" id="progressBar"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-indicator" aria-hidden="true">
+        <div class="scroll-mouse"></div>
+        <span>Scroll</span>
+      </div>
+      <section id="ai-demo" class="ai-demo" aria-labelledby="ai-demo-title">
+      <div class="ai-demo-bg" aria-hidden="true"></div>
+      <div class="ai-demo-shell">
+        <header class="ai-demo-header" data-aos="fade-up">
+          <p class="eyebrow">AI System Demo</p>
+          <h2 id="ai-demo-title">AI Upload + Processing Experience</h2>
+          <p class="ai-demo-sub">Real-time density analysis with a cinematic deep-learning pipeline.</p>
+        </header>
+
+        <div class="ai-stage" id="aiStage" data-aos="fade-up" data-aos-delay="150">
+          <div class="ai-upload-card is-active" id="aiUpload">
+            <div class="upload-glow" aria-hidden="true"></div>
+            <div class="upload-icon" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+            </div>
+            <h3>Upload Visual Crowd Data</h3>
+            <p>Supports images and videos for AI-based density analysis</p>
+            <div class="upload-formats">
+              <span class="format-pill">Image</span>
+              <span class="format-pill">Video</span>
+            </div>
+            <label class="upload-action">
+              <input type="file" id="aiUploadInput" accept="image/*,video/*" />
+              <span>Drag & Drop or Browse</span>
+            </label>
+          </div>
+
+          <div class="ai-processing" id="aiProcessing">
+            <div class="processing-left">
+              <canvas id="nnCanvas" width="420" height="280" aria-label="Neural network visualization"></canvas>
+              <div class="nn-caption">Neural inference stream</div>
+            </div>
+            <div class="processing-right">
+              <h3>AI Analysis in Progress</h3>
+              <div class="process-steps">
+                <div class="process-step" data-step="0">
+                  <span class="step-indicator"></span>
+                  <div>
+                    <strong>Frame Extraction</strong>
+                    <p>Sampling temporal frames from input.</p>
+                  </div>
+                </div>
+                <div class="process-step" data-step="1">
+                  <span class="step-indicator"></span>
+                  <div>
+                    <strong>Feature Encoding</strong>
+                    <p>Embedding visual cues into latent space.</p>
+                  </div>
+                </div>
+                <div class="process-step" data-step="2">
+                  <span class="step-indicator"></span>
+                  <div>
+                    <strong>Density Mapping</strong>
+                    <p>Generating calibrated heatmap layers.</p>
+                  </div>
+                </div>
+                <div class="process-step" data-step="3">
+                  <span class="step-indicator"></span>
+                  <div>
+                    <strong>Prediction Output</strong>
+                    <p>Converging regression to count estimate.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ai-progress">
+                <div class="ai-progress-label" id="aiProgressLabel">Initializing feature encoder…</div>
+                <div class="ai-progress-bar">
+                  <div class="ai-progress-fill" id="aiProgressFill"></div>
+                  <div class="ai-progress-pulse"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ai-result" id="aiResult">
+            <div class="result-panel">
+              <span class="result-tag">Input Media</span>
+              <div class="result-media">
+                <img id="aiResultImage" alt="Uploaded input" />
+                <video id="aiResultVideo" muted playsinline></video>
+              </div>
+            </div>
+            <div class="result-panel result-metrics">
+              <span class="result-tag">Estimated Crowd Count</span>
+              <div class="result-count" id="aiResultCount">0</div>
+              <div class="result-details">
+                <div>AI Confidence Score: <strong id="aiConfidence">--</strong></div>
+                <div>Processing Time: <strong id="aiTime">--</strong></div>
+                <div>Model Version: <strong>v2.1</strong></div>
+              </div>
+              <div class="confidence-bar">
+                <div class="confidence-fill" id="aiConfidenceFill"></div>
+              </div>
+              <button class="outline-btn download-btn">Download Result</button>
+            </div>
+            <div class="result-panel">
+              <span class="result-tag">Density Heatmap</span>
+              <div class="heatmap-box">
+                <div class="heatmap-layer"></div>
+                <div class="heatmap-spark"></div>
+              </div>
+            </div>
+            <button class="outline-btn reset-btn" id="aiReset">Run Another</button>
+          </div>
+        </div>
+      </div>
+      </section>
+    </section>  </main>
+
+  <footer class="footer">
+    <span>AI Research Lab Interface • 2026</span>
+    <span class="mono">Adaptive Crowd Analytica Lab</span>
+  </footer>
+
+  <div class="overlay" id="overlay" aria-hidden="true">
+    <div class="overlay-card">
+      <h3>Pipeline Preview</h3>
+      <p>Upload data to generate an estimated average crowd count based on density regression.</p>
+      <div class="timeline">
+        <div class="tick">
+          <span class="tick-title">Ingest</span>
+          <span class="tick-sub">Normalize data</span>
+        </div>
+        <div class="tick">
+          <span class="tick-title">Regress</span>
+          <span class="tick-sub">Density map prediction</span>
+        </div>
+        <div class="tick">
+          <span class="tick-title">Aggregate</span>
+          <span class="tick-sub">Average count output</span>
+        </div>
+      </div>
+      <button class="primary-btn" id="closeOverlay">Close</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lottie-web@5.12.2/build/player/lottie.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.0/dist/vanilla-tilt.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/countup.js@2.8.0/dist/countUp.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>

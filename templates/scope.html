@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="High-performance density map regression for adaptive crowd analytics using deep learning." />
+  <title>High-Performance Density Map Regression | Adaptive Crowd Analytica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-ring"></div>
+    <div class="loader-text">Initializing AI Interface...</div>
+  </div>
+  <div class="page-transition" id="pageTransition" aria-hidden="true"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <canvas id="shaderBg" aria-hidden="true"></canvas>
+  <div id="particles-js" aria-hidden="true"></div>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-grid-perspective" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+  <div class="bg-orb orb-1" aria-hidden="true"></div>
+  <div class="bg-orb orb-2" aria-hidden="true"></div>
+  <div class="bg-orb orb-3" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo logo-anim">HP</div>
+      <div class="brand-text">
+        <span class="brand-title">High-Performance Density Map Regression</span>
+        <span class="brand-sub">Adaptive Crowd Analytica</span>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Primary">
+      <span class="tab-indicator" aria-hidden="true"></span>
+      <a class="tab" role="tab" aria-selected="false" href="/templates/home.html">Home</a>
+      <a class="tab active" role="tab" aria-selected="true" href="/templates/scope.html">Scope</a>
+      <a class="tab" role="tab" aria-selected="false" href="/templates/team.html">Team</a>
+      <a class="tab" role="tab" aria-selected="false" href="/templates/about.html">About</a>
+    </nav>
+    <button class="ghost-btn">Request Demo</button>
+  </header>
+
+  <main>
+    <section id="scope" class="panel active" role="tabpanel">
+      <div class="scope-vision" id="scopeVision" data-aos="fade-up">
+        <div class="scope-header">
+          <h2>Future Scope & Scalability of Crowd Analytics System</h2>
+          <p>Extending AI-powered density estimation to real-world intelligent environments.</p>
+        </div>
+
+        <div class="scope-grid-vision">
+          <article class="scope-card-vision" data-scope="0">
+            <div class="scope-icon-vision">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <path d="M10 44h44" stroke="currentColor" stroke-width="2"/>
+                <path d="M14 44V30h8v14" stroke="currentColor" stroke-width="2"/>
+                <path d="M26 44V22h12v22" stroke="currentColor" stroke-width="2"/>
+                <path d="M42 44V26h8v18" stroke="currentColor" stroke-width="2"/>
+                <circle class="city-node" cx="18" cy="28" r="2"/>
+                <circle class="city-node" cx="32" cy="20" r="2"/>
+                <circle class="city-node" cx="46" cy="24" r="2"/>
+                <path class="city-line" d="M18 28 L32 20 L46 24" stroke="currentColor" stroke-width="1.5" fill="none"/>
+              </svg>
+            </div>
+            <h3>Smart Cities</h3>
+            <p>AI-powered crowd density monitoring for traffic flow optimization, urban planning, and infrastructure load balancing.</p>
+          </article>
+
+          <article class="scope-card-vision" data-scope="1">
+            <div class="scope-icon-vision">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <path d="M10 40c8-10 36-10 44 0" stroke="currentColor" stroke-width="2" fill="none"/>
+                <circle cx="20" cy="30" r="3"/>
+                <circle cx="32" cy="28" r="4"/>
+                <circle cx="44" cy="30" r="3"/>
+                <circle class="event-pulse" cx="32" cy="36" r="12" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <h3>Event Monitoring</h3>
+            <p>Real-time crowd estimation for concerts, sports events, and public gatherings to prevent overcrowding.</p>
+          </article>
+
+          <article class="scope-card-vision" data-scope="2">
+            <div class="scope-icon-vision">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <path d="M12 12h40v40H12z" stroke="currentColor" stroke-width="2" fill="none"/>
+                <path class="alert-scan" d="M12 28h40" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M32 18l10 18H22l10-18z" fill="currentColor"/>
+              </svg>
+            </div>
+            <h3>Disaster Management</h3>
+            <p>Rapid crowd density analysis in emergency zones to assist evacuation planning and rescue operations.</p>
+          </article>
+
+          <article class="scope-card-vision" data-scope="3">
+            <div class="scope-icon-vision">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <path d="M32 10l20 8v12c0 12-9 20-20 24-11-4-20-12-20-24V18l20-8z" stroke="currentColor" stroke-width="2" fill="none"/>
+                <circle class="radar-ring" cx="32" cy="30" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <path class="radar-sweep" d="M32 30 L50 26" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <h3>Public Safety</h3>
+            <p>AI surveillance support for public safety systems, anomaly detection, and risk prevention.</p>
+          </article>
+        </div>
+
+        <div class="scope-network">
+          <div class="network-title">Scalability Pipeline</div>
+          <svg viewBox="0 0 680 120" aria-hidden="true">
+            <circle cx="60" cy="60" r="20"/>
+            <circle cx="240" cy="60" r="20"/>
+            <circle cx="420" cy="60" r="20"/>
+            <circle cx="600" cy="60" r="20"/>
+            <path class="net-line" d="M80 60H220"/>
+            <path class="net-line" d="M260 60H400"/>
+            <path class="net-line" d="M440 60H580"/>
+          </svg>
+          <div class="network-labels">
+            <span>Camera Grid</span>
+            <span>Edge Server</span>
+            <span>AI Model</span>
+            <span>Operations Dashboard</span>
+          </div>
+        </div>
+
+        <div class="scope-tags">
+          <span class="scope-tag">Multi-Camera Integration</span>
+          <span class="scope-tag">Edge AI Deployment</span>
+          <span class="scope-tag">Cloud-Based Scaling</span>
+          <span class="scope-tag">Real-Time Analytics APIs</span>
+        </div>
+      </div>
+    </section>  </main>
+
+  <footer class="footer">
+    <span>AI Research Lab Interface • 2026</span>
+    <span class="mono">Adaptive Crowd Analytica Lab</span>
+  </footer>
+
+  <div class="overlay" id="overlay" aria-hidden="true">
+    <div class="overlay-card">
+      <h3>Pipeline Preview</h3>
+      <p>Upload data to generate an estimated average crowd count based on density regression.</p>
+      <div class="timeline">
+        <div class="tick">
+          <span class="tick-title">Ingest</span>
+          <span class="tick-sub">Normalize data</span>
+        </div>
+        <div class="tick">
+          <span class="tick-title">Regress</span>
+          <span class="tick-sub">Density map prediction</span>
+        </div>
+        <div class="tick">
+          <span class="tick-title">Aggregate</span>
+          <span class="tick-sub">Average count output</span>
+        </div>
+      </div>
+      <button class="primary-btn" id="closeOverlay">Close</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lottie-web@5.12.2/build/player/lottie.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.0/dist/vanilla-tilt.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/countup.js@2.8.0/dist/countUp.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>

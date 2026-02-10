@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="High-performance density map regression for adaptive crowd analytics using deep learning." />
+  <title>High-Performance Density Map Regression | Adaptive Crowd Analytica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-ring"></div>
+    <div class="loader-text">Initializing AI Interface...</div>
+  </div>
+  <div class="page-transition" id="pageTransition" aria-hidden="true"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <canvas id="shaderBg" aria-hidden="true"></canvas>
+  <div id="particles-js" aria-hidden="true"></div>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-grid-perspective" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+  <div class="bg-orb orb-1" aria-hidden="true"></div>
+  <div class="bg-orb orb-2" aria-hidden="true"></div>
+  <div class="bg-orb orb-3" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo logo-anim">HP</div>
+      <div class="brand-text">
+        <span class="brand-title">High-Performance Density Map Regression</span>
+        <span class="brand-sub">Adaptive Crowd Analytica</span>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Primary">
+      <span class="tab-indicator" aria-hidden="true"></span>
+      <a class="tab" role="tab" aria-selected="false" href="/templates/home.html">Home</a>
+      <a class="tab" role="tab" aria-selected="false" href="/templates/scope.html">Scope</a>
+      <a class="tab" role="tab" aria-selected="false" href="/templates/team.html">Team</a>
+      <a class="tab active" role="tab" aria-selected="true" href="/templates/about.html">About</a>
+    </nav>
+    <button class="ghost-btn">Request Demo</button>
+  </header>
+
+  <main>
+    <section id="about" class="panel active" role="tabpanel">
+      <div class="about-research about-2" id="aboutResearch" data-aos="fade-up">
+        <div class="about-header">
+          <h2>System Overview & Research Foundation</h2>
+          <p>Deep Learning-based Density Map Regression for Adaptive Crowd Analytics.</p>
+        </div>
+
+        <div class="research-flow">
+          <article class="research-block story-block">
+            <div class="block-title">Problem → Solution</div>
+            <div class="story-stage">
+              <div class="story-panel chaos">
+                <div class="story-visual">
+                  <span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <p>Traditional crowd counting fails in dense scenes…</p>
+              </div>
+              <div class="story-panel solution">
+                <div class="story-visual heatmap">
+                  <div class="heat-layer"></div>
+                </div>
+                <p>Density Map Regression enables pixel-level crowd estimation.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="research-block">
+            <div class="block-title">Interactive Model Pipeline</div>
+            <div class="pipeline-interactive">
+              <div class="pipe-node" data-tip="Ingests raw visual frames">Input</div>
+              <div class="pipe-node" data-tip="Extracts spatial crowd features">CNN Layers</div>
+              <div class="pipe-node" data-tip="Highlights density cues">Feature Maps</div>
+              <div class="pipe-node" data-tip="Regresses pixel density">Regression Head</div>
+              <div class="pipe-node" data-tip="Generates heat distribution">Density Map</div>
+              <div class="pipe-node" data-tip="Aggregates count estimate">Count Output</div>
+              <div class="pipe-flow"></div>
+            </div>
+          </article>
+
+          <article class="research-block">
+            <div class="block-title">Architecture Depth</div>
+            <div class="arch-3d">
+              <div class="cube">
+                <div class="face front">Input</div>
+                <div class="face back">Output</div>
+                <div class="face right">Layers</div>
+                <div class="face left">Features</div>
+                <div class="face top">Depth</div>
+                <div class="face bottom">Resolution</div>
+              </div>
+              <div class="arch-meta">
+                <span>Input Resolution: 512×512</span>
+                <span>Layer Depth: 12</span>
+                <span>Output Density Map: 128×128</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="research-block">
+            <div class="block-title">Technology Stack</div>
+            <div class="tech-grid">
+              <div class="tech-card">
+                <h4>Frontend</h4>
+                <span>HTML • CSS • JavaScript</span>
+              </div>
+              <div class="tech-card">
+                <h4>Backend</h4>
+                <span>Flask • Python</span>
+              </div>
+              <div class="tech-card">
+                <h4>AI</h4>
+                <span>Deep Learning • CNN • Computer Vision</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="research-block">
+            <div class="block-title">Results & Performance</div>
+            <div class="metrics-grid">
+              <div class="metric-card">
+                <span>Density Accuracy</span>
+                <div class="gauge"></div>
+              </div>
+              <div class="metric-card">
+                <span>Processing Speed</span>
+                <div class="line-meter">
+                  <div class="line-fill"></div>
+                </div>
+              </div>
+              <div class="metric-card">
+                <span>Model Efficiency</span>
+                <div class="bar-meter">
+                  <div class="bar-fill"></div>
+                </div>
+              </div>
+            </div>
+            <p class="block-text">Robust performance in varied crowd densities with stable inference under real-time constraints.</p>
+          </article>
+
+          <article class="research-block">
+            <div class="block-title">Applications in the Real World</div>
+            <div class="apps-scroll">
+              <div class="app-card">Smart Cities</div>
+              <div class="app-card">Event Monitoring</div>
+              <div class="app-card">Disaster Response</div>
+              <div class="app-card">Public Safety</div>
+            </div>
+          </article>
+
+          <article class="research-block">
+            <div class="block-title">Model Pipeline Diagram</div>
+            <div class="pipeline-diagram">
+              <span>Camera Input</span>
+              <span>Preprocessing</span>
+              <span>Feature Extraction</span>
+              <span>Regression Network</span>
+              <span>Density Output</span>
+              <span>Count</span>
+              <div class="pipeline-flow"></div>
+            </div>
+          </article>
+
+          <article class="research-block contributions">
+            <div class="block-title">Research Contributions</div>
+            <div class="contrib-grid">
+              <div class="contrib-card">Real-time density regression pipeline</div>
+              <div class="contrib-card">Adaptive crowd scaling</div>
+              <div class="contrib-card">Integration-ready system architecture</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>AI Research Lab Interface • 2026</span>
+    <span class="mono">Adaptive Crowd Analytica Lab</span>
+  </footer>
+
+  <div class="overlay" id="overlay" aria-hidden="true">
+    <div class="overlay-card">
+      <h3>Pipeline Preview</h3>
+      <p>Upload data to generate an estimated average crowd count based on density regression.</p>
+      <div class="timeline">
+        <div class="tick">
+          <span class="tick-title">Ingest</span>
+          <span class="tick-sub">Normalize data</span>
+        </div>
+        <div class="tick">
+          <span class="tick-title">Regress</span>
+          <span class="tick-sub">Density map prediction</span>
+        </div>
+        <div class="tick">
+          <span class="tick-title">Aggregate</span>
+          <span class="tick-sub">Average count output</span>
+        </div>
+      </div>
+      <button class="primary-btn" id="closeOverlay">Close</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lottie-web@5.12.2/build/player/lottie.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.0/dist/vanilla-tilt.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/countup.js@2.8.0/dist/countUp.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>
