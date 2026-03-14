@@ -46,3 +46,6 @@ Then open your browser at `http://127.0.0.1:5000`.
 ## Notes
 - `static/uploads/` is generated at runtime and is ignored by Git.
 - Large files (`*.pth`, `*.mp4`) are tracked with Git LFS.
+
+## License
+MIT License. See `LICENSE`.
