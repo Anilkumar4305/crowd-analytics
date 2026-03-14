@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="High-performance density map regression for adaptive crowd analytics using deep learning." />
+  <title>High-Performance Density Map Regression | Adaptive Crowd Analytica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&amp;family=Poppins:wght@300;400;500;600;700&amp;family=IBM+Plex+Mono:wght@300;400;500&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../static/styles.css" />
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    /* ================================================================
+       TEAM-CARD-ELITE  —  Light theme overrides
+       The base styles.css uses a dark card background (rgba 11 18 32).
+       Everything below flips only the card visuals to a premium
+       light surface while keeping all animations & structure intact.
+    ================================================================ */
+
+    /* 1. White card surface */
+    .team-card-elite {
+      background: #ffffff !important;
+      border: 1px solid rgba(99, 102, 241, 0.13) !important;
+      box-shadow:
+        0 2px 8px rgba(99, 102, 241, 0.06),
+        0 6px 24px rgba(30, 27, 75, 0.06) !important;
+      transition: transform 0.38s cubic-bezier(0.34, 1.4, 0.64, 1),
+                  box-shadow 0.38s ease,
+                  border-color 0.38s ease !important;
+    }
+
+    /* 2. Hover — soft lift with indigo glow */
+    .team-card-elite:hover,
+    .team-card-elite:focus-within {
+      transform: translateY(-10px) scale(1.018) !important;
+      border-color: rgba(99, 102, 241, 0.28) !important;
+      box-shadow:
+        0 8px 20px rgba(99, 102, 241, 0.10),
+        0 20px 48px rgba(99, 102, 241, 0.14) !important;
+    }
+
+    /* 3. Glow ring — pull behind card so it reads on white */
+    .team-card-elite .card-glow-ring {
+      background: linear-gradient(
+        135deg,
+        rgba(99, 102, 241, 0.30),
+        rgba(168, 85, 247, 0.28),
+        rgba(6, 182, 212, 0.22)
+      );
+      filter: blur(16px);
+      z-index: -1;
+    }
+
+    .team-card-elite:hover .card-glow-ring {
+      opacity: 0.55;
+    }
+
+    /* 4. Shine sweep — brighter on white */
+    .team-card-elite .card-shine {
+      background: linear-gradient(
+        115deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.55) 45%,
+        rgba(255, 255, 255, 0.80) 50%,
+        rgba(255, 255, 255, 0.55) 55%,
+        transparent 100%
+      );
+    }
+
+    /* 5. Top accent stripe per card (reveals on hover) */
+    .team-card-elite .card-surface {
+      border-radius: inherit;
+      overflow: hidden;
+    }
+
+    .team-card-elite .card-surface::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      border-radius: 28px 28px 0 0;
+      background: linear-gradient(90deg, #6366F1, #A855F7, #06B6D4);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      z-index: 5;
+    }
+
+    .team-card-elite:hover .card-surface::before {
+      opacity: 1;
+    }
+
+    /* 6. Per-member avatar ring & badge colours */
+    .team-card-elite[data-member="sarah"] .avatar-ring {
+      background: linear-gradient(135deg, #6366F1, #06B6D4);
+    }
+
+    .team-card-elite[data-member="priya"] .avatar-ring {
+      background: linear-gradient(135deg, #F59E0B, #EF4444);
+    }
+
+    .team-card-elite[data-member="miguel"] .avatar-ring {
+      background: linear-gradient(135deg, #10B981, #06B6D4);
+    }
+
+    .team-card-elite[data-member="emma"] .avatar-ring {
+      background: linear-gradient(135deg, #A855F7, #EC4899);
+    }
+
+    .team-card-elite[data-member="sarah"] .avatar-badge {
+      background: linear-gradient(135deg, #6366F1, #06B6D4);
+      color: #fff;
+      border: 2px solid #fff;
+      box-shadow: 0 3px 10px rgba(99, 102, 241, 0.35);
+    }
+
+    .team-card-elite[data-member="priya"] .avatar-badge {
+      background: linear-gradient(135deg, #F59E0B, #EF4444);
+      color: #fff;
+      border: 2px solid #fff;
+      box-shadow: 0 3px 10px rgba(245, 158, 11, 0.35);
+    }
+
+    .team-card-elite[data-member="miguel"] .avatar-badge {
+      background: linear-gradient(135deg, #10B981, #06B6D4);
+      color: #fff;
+      border: 2px solid #fff;
+      box-shadow: 0 3px 10px rgba(16, 185, 129, 0.35);
+    }
+
+    .team-card-elite[data-member="emma"] .avatar-badge {
+      background: linear-gradient(135deg, #A855F7, #EC4899);
+      color: #fff;
+      border: 2px solid #fff;
+      box-shadow: 0 3px 10px rgba(168, 85, 247, 0.35);
+    }
+
+    /* Per-member hover stripe colour */
+    .team-card-elite[data-member="sarah"] .card-surface::before {
+      background: linear-gradient(90deg, #6366F1, #06B6D4);
+    }
+
+    .team-card-elite[data-member="priya"] .card-surface::before {
+      background: linear-gradient(90deg, #F59E0B, #EF4444);
+    }
+
+    .team-card-elite[data-member="miguel"] .card-surface::before {
+      background: linear-gradient(90deg, #10B981, #06B6D4);
+    }
+
+    .team-card-elite[data-member="emma"] .card-surface::before {
+      background: linear-gradient(90deg, #A855F7, #EC4899);
+    }
+
+    /* 7. Avatar ring — shadow lift on hover */
+    .avatar-ring {
+      box-shadow: 0 3px 14px rgba(99, 102, 241, 0.18);
+      transition: box-shadow 0.38s ease,
+                  transform 0.38s cubic-bezier(0.34, 1.4, 0.64, 1);
+    }
+
+    .team-card-elite:hover .avatar-ring {
+      box-shadow: 0 8px 28px rgba(99, 102, 241, 0.30);
+      transform: scale(1.05);
+    }
+
+    /* 8. Avatar overlay — lighter tint on white cards */
+    .avatar-overlay {
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.09), transparent 70%);
+    }
+
+    /* 9. Glow pulse — soft halo */
+    .avatar-glow-pulse {
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.18), transparent 70%);
+    }
+
+    .team-card-elite:hover .avatar-glow-pulse {
+      opacity: 1;
+      animation: softPulse 2.4s ease infinite;
+    }
+
+    @keyframes softPulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.6;
+      }
+
+      50% {
+        transform: scale(1.07);
+        opacity: 1;
+      }
+    }
+
+    /* 10. Member name — dark text (was light on dark bg) */
+    .member-name {
+      color: #1E1B4B;
+    }
+
+    /* 11. Member bio — readable grey */
+    .member-bio {
+      color: #64748b;
+    }
+
+    /* 12. Stat mini tiles — light tinted surface */
+    .stat-mini {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(168, 85, 247, 0.05));
+      border: 1px solid rgba(99, 102, 241, 0.10);
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .team-card-elite:hover .stat-mini {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.09), rgba(168, 85, 247, 0.09));
+      border-color: rgba(99, 102, 241, 0.18);
+    }
+
+    .stat-mini-value {
+      color: var(--primary);
+    }
+
+    /* 13. Skill tags — legible on white */
+    .skill-tag {
+      color: #6d28d9;
+      background: rgba(109, 40, 217, 0.07);
+      border: 1px solid rgba(109, 40, 217, 0.20);
+    }
+
+    .skill-tag:hover {
+      background: rgba(109, 40, 217, 0.13);
+      transform: translateY(-1px);
+    }
+
+    /* 14. Floating particles — indigo dots */
+    .particle {
+      background: rgba(99, 102, 241, 0.55);
+      box-shadow: 0 0 6px rgba(99, 102, 241, 0.28);
+    }
+
+    /* 15. Stats bar — glass light panel */
+    .team-stats-bar {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+      grid-template-columns: unset !important;
+      background: rgba(255, 255, 255, 0.85) !important;
+      border: 1px solid rgba(99, 102, 241, 0.14) !important;
+      box-shadow: 0 4px 24px rgba(99, 102, 241, 0.07), 0 1px 4px rgba(30, 27, 75, 0.04) !important;
+      backdrop-filter: blur(20px);
+    }
+
+    .team-stats-bar .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      flex: 1;
+    }
+
+    .team-stats-bar .stat-number {
+      color: #1E1B4B;
+    }
+
+    .team-stats-bar .stat-divider {
+      display: block !important;
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(180deg, transparent, rgba(99, 102, 241, 0.2), transparent);
+      margin: 0 12px;
+    }
+
+    /* 16. Background orbs — softer on light pages */
+    .team-bg-gradient .orb-1 {
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.16), transparent 68%);
+    }
+
+    .team-bg-gradient .orb-2 {
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.14), transparent 68%);
+    }
+
+    /* 17. Staggered entrance animation */
+    .team-card-elite {
+      animation: cardRise 0.55s cubic-bezier(0.34, 1.2, 0.64, 1) both;
+    }
+
+    .team-card-elite:nth-child(1) {
+      animation-delay: 0.05s;
+    }
+
+    .team-card-elite:nth-child(2) {
+      animation-delay: 0.14s;
+    }
+
+    .team-card-elite:nth-child(3) {
+      animation-delay: 0.23s;
+    }
+
+    .team-card-elite:nth-child(4) {
+      animation-delay: 0.32s;
+    }
+
+    @keyframes cardRise {
+      from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.97);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* 18. Respect reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+      .team-card-elite,
+      .team-card-elite * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-ring"></div>
+    <div class="loader-text">Initializing AI Interface...</div>
+  </div>
+  <div class="page-transition" id="pageTransition" aria-hidden="true"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <canvas id="shaderBg" aria-hidden="true"></canvas>
+  <div id="particles-js" aria-hidden="true"></div>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-grid-perspective" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+  <div class="bg-orb orb-1" aria-hidden="true"></div>
+  <div class="bg-orb orb-2" aria-hidden="true"></div>
+  <div class="bg-orb orb-3" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo logo-anim">HP</div>
+      <div class="brand-text">
+        <span class="brand-title">High-Performance Density Map Regression</span>
+        <span class="brand-sub">Adaptive Crowd Analytica</span>
+      </div>
+    </div>
+    <nav class="tabs" role="navigation" aria-label="Primary navigation">
+      <span class="tab-indicator" aria-hidden="true"></span>
+      <a class="tab" role="tab" aria-selected="false" href="./home.html">Home</a>
+      <a class="tab" role="tab" aria-selected="false" href="./scope.html">Scope</a>
+      <a class="tab active" role="tab" aria-selected="true" href="./team.html">Team</a>
+      <a class="tab" role="tab" aria-selected="false" href="./about.html">About</a>
+    </nav>
+  </header>
+
+  <main role="main">
+    <section id="team" class="panel active" role="tabpanel">
+      <section class="team-section-ultimate" id="teamSection">
+        <div class="team-bg-gradient" aria-hidden="true">
+          <div class="gradient-orb orb-1"></div>
+          <div class="gradient-orb orb-2"></div>
+          <div class="gradient-mesh"></div>
+        </div>
+
+        <header class="team-header-elite" data-aos="fade-down">
+          <div class="header-badge">
+            <span class="badge-icon">*</span>
+            <span class="badge-text">Meet The Innovators</span>
+          </div>
+
+          <h2 class="team-title-mega">
+            <span class="title-word">The</span>
+            <span class="title-word gradient-text">Dream</span>
+            <span class="title-word">Team</span>
+          </h2>
+
+          <p class="team-subtitle-rich">
+            Exceptional minds pioneering the future of AI-driven crowd analytics
+          </p>
+
+          <div class="team-stats-bar">
+            <div class="stat-item">
+              <span class="stat-number">4</span>
+              <span class="stat-label">Team Members</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-number">12</span>
+              <span class="stat-suffix">+</span>
+              <span class="stat-label">Core Skills</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-number">3</span>
+              <span class="stat-label">Research Areas</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="team-grid-elite">
+          <article class="team-card-elite" data-member="sarah" data-aos="zoom-in" data-aos-delay="100">
+            <div class="card-glow-ring"></div>
+            <div class="card-shine"></div>
+
+            <div class="card-surface">
+              <div class="avatar-section">
+                <div class="avatar-ring">
+                  <div class="avatar-glow-pulse"></div>
+                  <div class="avatar-image-wrapper">
+                    <img src="../static/images/team/anil.png"
+                         alt="Anil Kumar - Frontend Developer"
+                         class="avatar-image"
+                         loading="lazy"
+                         decoding="async">
+                    <div class="avatar-overlay"></div>
+                  </div>
+                  <div class="avatar-badge">FE</div>
+                </div>
+              </div>
+
+              <div class="info-section">
+                <h3 class="member-name">
+                  <span class="name-text">Anil Kumar</span>
+                  <span class="name-underline"></span>
+                </h3>
+                <div class="role-badge-container">
+                  <div class="role-badge">
+                    <span class="role-icon">FE</span>
+                    <span class="role-text">Frontend Developer</span>
+                  </div>
+                </div>
+                <p class="member-bio">
+                  Designs the user interface for the crowd analytics system, displays uploaded images/videos with predicted density results, and connects UI with backend APIs.
+                </p>
+                <div class="key-stats-mini">
+                  <div class="stat-mini">
+                    <span class="stat-mini-value">85%</span>
+                    <span class="stat-mini-label">UI Delivery</span>
+                  </div>
+                  <div class="stat-mini">
+                    <span class="stat-mini-value">85%</span>
+                    <span class="stat-mini-label">API Wiring</span>
+                  </div>
+                  <div class="stat-mini">
+                    <span class="stat-mini-value">1</span>
+                    <span class="stat-mini-label">Core Owner</span>
+                  </div>
+                </div>
+                <div class="skill-tags">
+                  <span class="skill-tag">Frontend UI</span>
+                  <span class="skill-tag">Result Display</span>
+                  <span class="skill-tag">API Integration</span>
+                </div>
+              </div>
+            </div>
+            <div class="card-particles" aria-hidden="true">
+              <span class="particle p1"></span>
+              <span class="particle p2"></span>
+              <span class="particle p3"></span>
+            </div>
+          </article>
+
+          <article class="team-card-elite" data-member="priya" data-aos="zoom-in" data-aos-delay="180">
+            <div class="card-glow-ring"></div>
+            <div class="card-shine"></div>
+
+            <div class="card-surface">
+              <div class="avatar-section">
+                <div class="avatar-ring">
+                  <div class="avatar-glow-pulse"></div>
+                  <div class="avatar-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=500&q=80&fm=webp"
+                         alt="Mounika Sri - Backend Developer"
+                         class="avatar-image"
+                         loading="lazy"
+                         decoding="async">
+                    <div class="avatar-overlay"></div>
+                  </div>
+                  <div class="avatar-badge">BE</div>
+                </div>
+              </div>
+
+              <div class="info-section">
+                <h3 class="member-name">
+                  <span class="name-text">Mounika Sri</span>
+                  <span class="name-underline"></span>
+                </h3>
+                <div class="role-badge-container">
+                  <div class="role-badge">
+                    <span class="role-icon">BE</span>
+                    <span class="role-text">Backend Developer</span>
+                  </div>
+                </div>
+                <p class="member-bio">
+                  Builds the server-side logic, handles image input/data processing/model integration, and manages data flow between frontend and deep learning model.
+                </p>
+                <div class="key-stats-mini">
+                  <div class="stat-mini">
+                    <span class="stat-mini-value">85%</span>
+                    <span class="stat-mini-label">Server Logic</span>
+                  </div>
+                  <div class="stat-mini">
+                    <span class="stat-mini-value">85%</span>
+                    <span class="stat-mini-label">Data Flow</span>
+                  </div>
+                  <div class="stat-mini">
+                    <span class="stat-mini-value">1</span>
+                    <span class="stat-mini-label">Core Owner</span>
+                  </div>
+                </div>
+                <div class="skill-tags">
+                  <span class="skill-tag">Python Backend</span>
+                  <span class="skill-tag">Model Integration</span>
+                  <span class="skill-tag">Data Pipeline</span>
+                </div>
+              </div>
+            </div>
+            <div class="card-particles" aria-hidden="true">
+              <span class="particle p1"></span>
+              <span class="particle p2"></span>
+              <span class="particle p3"></span>
+            </div>
+          </article>
+
+          <article class="team-card-elite" data-member="miguel" data-aos="zoom-in" data-aos-delay="260">
+            <div class="card-glow-ring"></div>
+            <div class="card-shine"></div>
+
+            <div class="card-surface">
+              <div class="avatar-section">
+                <div class="avatar-ring">
+                  <div class="avatar-glow-pulse"></div>
+                  <div class="avatar-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80&fm=webp"
+                         alt="Abhi ram - Model Developer"
+                         class="avatar-image"
+                         loading="lazy"
+                         decoding="async">
+                    <div class="avatar-overlay"></div>
+                  </div>
+                  <div class="avatar-badge">MD</div>
+                </div>
+              </div>
+
+              <div class="info-section">
+                <h3 class="member-name">
+                  <span class="name-text">Abhi ram</span>
+                  <span class="name-underline"></span>
+                </h3>
+                <div class="role-badge-container">
+                  <div class="role-badge">
+                    <span class="role-icon">MD</span>
+                    <span class="role-text">Model Developer</span>
+                  </div>
+                </div>
+                <p class="member-bio">
+                  Implements the CNN density map regression model, prepares dataset/training/testing workflows, and optimizes model accuracy and performance.
+                </p>
+                <div class="key-stats-mini">
+                  <div class="stat-mini">
+                    <span class="stat-mini-value">85%</span>
+                    <span class="stat-mini-label">Modeling</span>
+                  </div>
+                  <div class="stat-mini">
+                    <span class="stat-mini-value">85%</span>
+                    <span class="stat-mini-label">Training</span>
+                  </div>
+                  <div class="stat-mini">
+                    <span class="stat-mini-value">1</span>
+                    <span class="stat-mini-label">Core Owner</span>
+                  </div>
+                </div>
+                <div class="skill-tags">
+                  <span class="skill-tag">CNN Regression</span>
+                  <span class="skill-tag">Dataset Prep</span>
+                  <span class="skill-tag">Performance Tuning</span>
+                </div>
+              </div>
+            </div>
+            <div class="card-particles" aria-hidden="true">
+              <span class="particle p1"></span>
+              <span class="particle p2"></span>
+              <span class="particle p3"></span>
+            </div>
+          </article>
+
+          <article class="team-card-elite" data-member="emma" data-aos="zoom-in" data-aos-delay="340">
+            <div class="card-glow-ring"></div>
+            <div class="card-shine"></div>
+
+            <div class="card-surface">
+              <div class="avatar-section">
+                <div class="avatar-ring">
+                  <div class="avatar-glow-pulse"></div>
+                  <div class="avatar-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=500&q=80&fm=webp"
+                         alt="Manish - Validation Engineer"
+                         class="avatar-image"
+                         loading="lazy"
+                         decoding="async">
+                    <div class="avatar-overlay"></div>
+                  </div>
+                  <div class="avatar-badge">VE</div>
+                </div>
+              </div>
+
+              <div class="info-section">
+                <h3 class="member-name">
+                  <span class="name-text">Manish</span>
+                  <span class="name-underline"></span>
+                </h3>
+                <div class="role-badge-container">
+                  <div class="role-badge">
+                    <span class="role-icon">VE</span>
+                    <span class="role-text">Validation Engineer</span>
+                  </div>
+                </div>
+                <p class="member-bio">
+                  Tests the system with different crowd images, validates prediction accuracy, reports bugs, and ensures reliability.
+                </p>
+                <div class="key-stats-mini">
+                  <div class="stat-mini">
+                    <span class="stat-mini-value">85%</span>
+                    <span class="stat-mini-label">Testing</span>
+                  </div>
+                  <div class="stat-mini">
+                    <span class="stat-mini-value">85%</span>
+                    <span class="stat-mini-label">Validation</span>
+                  </div>
+                  <div class="stat-mini">
+                    <span class="stat-mini-value">1</span>
+                    <span class="stat-mini-label">Core Owner</span>
+                  </div>
+                </div>
+                <div class="skill-tags">
+                  <span class="skill-tag">QA Testing</span>
+                  <span class="skill-tag">Bug Reporting</span>
+                  <span class="skill-tag">Reliability</span>
+                </div>
+              </div>
+            </div>
+            <div class="card-particles" aria-hidden="true">
+              <span class="particle p1"></span>
+              <span class="particle p2"></span>
+              <span class="particle p3"></span>
+            </div>
+          </article>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script defer src="../static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="High-performance density map regression for adaptive crowd analytics using deep learning." />
+  <title>High-Performance Density Map Regression | Adaptive Crowd Analytica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../static/styles.css" />
+<!-- moved to /static/styles.css -->
+</head>
+<body>
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-ring"></div>
+    <div class="loader-text">Initializing AI Interface...</div>
+  </div>
+  <div class="page-transition" id="pageTransition" aria-hidden="true"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <canvas id="shaderBg" aria-hidden="true"></canvas>
+  <div id="particles-js" aria-hidden="true"></div>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-grid-perspective" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+  <div class="bg-orb orb-1" aria-hidden="true"></div>
+  <div class="bg-orb orb-2" aria-hidden="true"></div>
+  <div class="bg-orb orb-3" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo logo-anim">HP</div>
+      <div class="brand-text">
+        <span class="brand-title">High-Performance Density Map Regression</span>
+        <span class="brand-sub">Adaptive Crowd Analytica</span>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Primary">
+      <span class="tab-indicator" aria-hidden="true"></span>
+      <a class="tab active" role="tab" aria-selected="true" href="./home.html">Home</a>
+      <a class="tab" role="tab" aria-selected="false" href="./scope.html">Scope</a>
+      <a class="tab" role="tab" aria-selected="false" href="./team.html">Team</a>
+      <a class="tab" role="tab" aria-selected="false" href="./about.html">About</a>
+    </nav>
+  </header>
+
+  <main>
+<section id="home" class="panel active home-competition" role="tabpanel">
+
+  <!-- ╔════════════════════════════════════════╗
+       ║  HERO: CINEMATIC SPLIT LAYOUT          ║
+       ╚════════════════════════════════════════╝ -->
+  <div class="hc-hero">
+    <!-- Layered atmospheric background -->
+    <div class="hc-hero__bg" aria-hidden="true">
+      <div class="hc-hero__bg-grid"></div>
+      <div class="hc-hero__bg-scanline"></div>
+      <canvas class="hc-hero__bg-canvas" id="heroNeuralCanvas"></canvas>
+      <div class="hc-hero__bg-orb hc-hero__bg-orb--a"></div>
+      <div class="hc-hero__bg-orb hc-hero__bg-orb--b"></div>
+    </div>
+
+    <div class="hc-hero__inner">
+      <!-- LEFT COLUMN -->
+      <div class="hc-hero__left">
+        <!-- Headline -->
+        <h1 class="hc-headline">
+          <span class="hc-headline__line hc-headline__line--reveal" style="--delay:0ms">
+            High-Performance
+          </span>
+          <span class="hc-headline__line hc-headline__line--reveal" style="--delay:80ms">
+            Density Map
+          </span>
+          <span class="hc-headline__line hc-headline__line--accent hc-headline__line--reveal" style="--delay:160ms">
+            Regression
+          </span>
+        </h1>
+
+        <!-- Sub-caption with typed word -->
+        <p class="hc-caption">
+          Image-based crowd counting — showing
+          <span class="hc-typewriter" id="hcTypewriter" aria-live="polite">count</span>
+          from a single image with a focused academic pipeline.
+        </p>
+
+        <!-- Stat pills row -->
+        <div class="hc-stats" role="list" aria-label="Key statistics">
+          <div class="hc-stat" role="listitem">
+            <span class="hc-stat__value" data-hc-counter data-target="150000" data-suffix="+" data-sep=",">0</span>
+            <span class="hc-stat__label">Samples Analyzed</span>
+          </div>
+          <div class="hc-stat hc-stat--divider" role="separator" aria-hidden="true"></div>
+          <div class="hc-stat" role="listitem">
+            <span class="hc-stat__value" data-hc-counter data-target="85" data-dec="0" data-suffix="%">0</span>
+            <span class="hc-stat__label">Accuracy rate</span>
+          </div>
+          <div class="hc-stat hc-stat--divider" role="separator" aria-hidden="true"></div>
+          <div class="hc-stat" role="listitem">
+            <span class="hc-stat__value" data-hc-counter data-target="30" data-suffix="ms">&lt;30</span>
+            <span class="hc-stat__label">Inference time</span>
+          </div>
+        </div>
+
+        <!-- CTA row -->
+        <div class="hc-actions">
+          <button class="hc-btn hc-btn--primary" id="hcUploadBtn" type="button">
+            <svg class="hc-btn__icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M10 3v10M6 7l4-4 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M3 15h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Upload Data
+            <span class="hc-btn__shimmer" aria-hidden="true"></span>
+          </button>
+
+          <button class="hc-btn hc-btn--outline" id="hcExploreBtn" type="button">
+            Explore Capabilities
+            <svg class="hc-btn__icon hc-btn__icon--right" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M7 10h6M10 7l3 3-3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: Neural canvas card -->
+      <div class="hc-hero__right" aria-label="Crowd scene preview">
+        <div class="hc-visor">
+          <!-- Header bar -->
+          <div class="hc-visor__bar">
+            <div class="hc-visor__bar-left">
+              <span class="hc-visor__dot hc-visor__dot--red" aria-hidden="true"></span>
+              <span class="hc-visor__dot hc-visor__dot--amber" aria-hidden="true"></span>
+              <span class="hc-visor__dot hc-visor__dot--green" aria-hidden="true"></span>
+              <span class="hc-visor__label">crowd_analytics.ai</span>
+            </div>
+            <div class="hc-visor__bar-right">
+              <span class="hc-visor__fps">
+                FPS <span id="hcFps" aria-live="polite">60</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Crowd video viewport -->
+          <div class="hc-visor__canvas-wrap hc-video-visor-wrap">
+            <video
+              class="hc-hero-video"
+              aria-label="Crowd people scene video"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+            >
+              <source src="../static/media/home-crowd-hero.mp4" type="video/mp4" />
+            </video>
+
+            <!-- Data readout badges -->
+            <div class="visor-data-badge" aria-live="polite" aria-label="Analytics readout">
+              <div class="badge-item">
+                <span>85%</span>
+                Accuracy
+              </div>
+              <div class="badge-item">
+                <span>&lt;30ms</span>
+                Latency
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Footer bar -->
+          <div class="hc-visor__footer">
+            <span class="hc-visor__footer-label">Crowd Scene Stream · Model-Ready Input</span>
+            <div class="hc-visor__indicators">
+              <span class="hc-indicator">
+                <span class="hc-indicator__dot hc-indicator__dot--cyan" aria-hidden="true"></span>
+                Tracking
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔════════════════════════════════════════╗
+       ║  METRICS TICKER BAR                    ║
+       ╚════════════════════════════════════════╝ -->
+  <div class="hc-ticker-rail" aria-label="Performance metrics">
+    <div class="hc-ticker-track" aria-hidden="true">
+      <!-- duplicated for infinite scroll -->
+      <span class="hc-ticker-item"><b>Flask</b> Backend Service</span>
+      <span class="hc-ticker-sep">◆</span>
+      <span class="hc-ticker-item"><b>85%</b> Project Accuracy</span>
+      <span class="hc-ticker-sep">◆</span>
+      <span class="hc-ticker-item"><b>PyTorch</b> Density Model</span>
+      <span class="hc-ticker-sep">◆</span>
+      <span class="hc-ticker-item"><b>4</b> Team Roles Defined</span>
+      <span class="hc-ticker-sep">◆</span>
+      <span class="hc-ticker-item"><b>4</b> Main Interface Tabs</span>
+      <span class="hc-ticker-sep">◆</span>
+      <span class="hc-ticker-item"><b>Flask</b> Backend Service</span>
+      <span class="hc-ticker-sep">◆</span>
+      <span class="hc-ticker-item"><b>85%</b> Project Accuracy</span>
+      <span class="hc-ticker-sep">◆</span>
+      <span class="hc-ticker-item"><b>PyTorch</b> Density Model</span>
+      <span class="hc-ticker-sep">◆</span>
+      <span class="hc-ticker-item"><b>4</b> Team Roles Defined</span>
+      <span class="hc-ticker-sep">◆</span>
+      <span class="hc-ticker-item"><b>4</b> Main Interface Tabs</span>
+      <span class="hc-ticker-sep">◆</span>
+    </div>
+  </div>
+
+  <!-- ╔════════════════════════════════════════╗
+       ║  METRICS DASHBOARD — 4-CARD GRID       ║
+       ╚════════════════════════════════════════╝ -->
+  <div class="hc-metrics" aria-label="Performance metrics dashboard">
+    <div class="hc-metrics__header">
+      <h2 class="hc-section-title">Performance Metrics</h2>
+      <p class="hc-section-sub">Continuously updated system statistics and operational telemetry</p>
+    </div>
+
+    <div class="hc-metrics__grid" role="list">
+
+      <article class="hc-mcard" role="listitem" tabindex="0">
+        <div class="hc-mcard__glow hc-mcard__glow--cyan" aria-hidden="true"></div>
+        <div class="hc-mcard__icon hc-mcard__icon--cyan" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="hc-mcard__body">
+          <div class="hc-mcard__value-row">
+            <span class="hc-mcard__value" data-hc-counter data-target="150000" data-sep="," data-suffix="">0</span>
+          </div>
+          <span class="hc-mcard__label">Samples Analyzed</span>
+          <div class="hc-mcard__sparkline" aria-hidden="true">
+            <svg viewBox="0 0 80 24" preserveAspectRatio="none">
+              <polyline points="0,20 10,16 20,12 30,14 40,8 50,6 60,10 70,4 80,2" fill="none" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </div>
+        </div>
+        <span class="hc-mcard__trend hc-mcard__trend--up" aria-label="Up 24% this month">↑ +24%</span>
+      </article>
+
+      <article class="hc-mcard" role="listitem" tabindex="0">
+        <div class="hc-mcard__glow hc-mcard__glow--green" aria-hidden="true"></div>
+        <div class="hc-mcard__icon hc-mcard__icon--green" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="hc-mcard__body">
+          <div class="hc-mcard__value-row">
+            <span class="hc-mcard__value" data-hc-counter data-target="85" data-dec="0" data-suffix="%">0</span>
+          </div>
+          <span class="hc-mcard__label">Accuracy Rate</span>
+          <div class="hc-mcard__bar-track" aria-hidden="true" role="presentation">
+            <div class="hc-mcard__bar-fill" style="--bar-pct:85%"></div>
+          </div>
+        </div>
+        <span class="hc-mcard__trend hc-mcard__trend--up" aria-label="Improved 0.3%">↑ +0.3%</span>
+      </article>
+
+      <article class="hc-mcard" role="listitem" tabindex="0">
+        <div class="hc-mcard__glow hc-mcard__glow--purple" aria-hidden="true"></div>
+        <div class="hc-mcard__icon hc-mcard__icon--purple" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="hc-mcard__body">
+          <div class="hc-mcard__value-row">
+            <span class="hc-mcard__value" data-hc-counter data-target="30" data-suffix="ms">0</span>
+          </div>
+          <span class="hc-mcard__label">Processing Time</span>
+          <div class="hc-mcard__sparkline hc-mcard__sparkline--fast" aria-hidden="true">
+            <svg viewBox="0 0 80 24" preserveAspectRatio="none">
+              <polyline points="0,18 10,14 20,10 30,16 40,6 50,10 60,4 70,8 80,2" fill="none" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </div>
+        </div>
+        <span class="hc-mcard__trend hc-mcard__trend--down-good" aria-label="15ms faster">↓ −15ms</span>
+      </article>
+
+      <article class="hc-mcard" role="listitem" tabindex="0">
+        <div class="hc-mcard__glow hc-mcard__glow--orange" aria-hidden="true"></div>
+        <div class="hc-mcard__icon hc-mcard__icon--orange" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
+            <circle cx="12" cy="9" r="7" stroke="currentColor" stroke-width="2"/>
+            <path d="M7.22 14.55L5 22l7-3 7 3-2.22-7.45" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="hc-mcard__body">
+          <div class="hc-mcard__value-row">
+            <span class="hc-mcard__value" data-hc-counter data-target="48" data-suffix=" fps">0</span>
+          </div>
+          <span class="hc-mcard__label">Processing Throughput</span>
+          <div class="hc-mcard__dots" aria-hidden="true">
+            <span class="hc-dot hc-dot--fill"></span><span class="hc-dot hc-dot--fill"></span>
+            <span class="hc-dot hc-dot--fill"></span><span class="hc-dot hc-dot--fill"></span>
+            <span class="hc-dot hc-dot--fill"></span><span class="hc-dot hc-dot--half"></span>
+            <span class="hc-dot"></span><span class="hc-dot"></span>
+          </div>
+        </div>
+        <span class="hc-mcard__trend hc-mcard__trend--up" aria-label="Up 6 fps">↑ +6 fps</span>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- ╔════════════════════════════════════════╗
+       ║  INTERACTIVE AI DEMO (KEEP EXISTING)   ║
+       ╚════════════════════════════════════════╝ -->
+<!-- ═══════════════════════════════════════════════════════════
+     ADVANCED INTERACTIVE AI DEMO — Competition Grade v3
+     ═══════════════════════════════════════════════════════════ -->
+<div class="ademo" id="aiDemoSection" aria-label="Interactive AI-powered crowd analytics demo">
+
+  <!-- Atmospheric depth layers -->
+  <div class="ademo__atmosphere" aria-hidden="true">
+    <div class="ademo__atm-orb ademo__atm-orb--left"></div>
+    <div class="ademo__atm-orb ademo__atm-orb--right"></div>
+    <div class="ademo__atm-grid"></div>
+    <div class="ademo__atm-scan"></div>
+  </div>
+
+  <!-- ── Header ─────────────────────────────────────────────── -->
+  <div class="ademo__header">
+    <h2 class="ademo__title">
+      Experience AI-Powered
+      <span class="ademo__title-accent">Crowd Analytics</span>
+    </h2>
+    <p class="ademo__subtitle">
+      Upload real crowd imagery and run backend crowd analysis to generate density maps and count estimates.
+    </p>
+  </div>
+
+  <!-- ── Pipeline breadcrumb rail ───────────────────────────── -->
+  <nav class="ademo__rail" aria-label="Demo pipeline steps">
+    <div class="ademo__rail-track" aria-hidden="true">
+      <div class="ademo__rail-progress" id="ademoPipelineProgress" style="width:{% if count is defined %}100%{% else %}0%{% endif %};"></div>
+    </div>
+
+    <button class="ademo__rail-step {% if count is defined %}ademo__rail-step--done{% else %}ademo__rail-step--active{% endif %}" id="ademoRailUpload"
+            data-stage="upload" type="button" {% if count is defined %}aria-disabled="true"{% else %}aria-current="step"{% endif %}>
+      <span class="ademo__rail-step-icon" aria-hidden="true">
+        <svg viewBox="0 0 18 18" fill="none" width="14" height="14">
+          <path d="M9 2v10M5 6l4-4 4 4" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 14h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="ademo__rail-step-label">Upload</span>
+    </button>
+
+    <button class="ademo__rail-step {% if count is defined %}ademo__rail-step--done{% endif %}" id="ademoRailProcess"
+            data-stage="processing" type="button" aria-disabled="true">
+      <span class="ademo__rail-step-icon" aria-hidden="true">
+        <svg viewBox="0 0 18 18" fill="none" width="14" height="14">
+          <circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M9 5v4l2.8 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="ademo__rail-step-label">Processing</span>
+    </button>
+
+    <button class="ademo__rail-step {% if count is defined %}ademo__rail-step--active{% endif %}" id="ademoRailResults"
+            data-stage="results" type="button" aria-disabled="true" {% if count is defined %}aria-current="step"{% endif %}>
+      <span class="ademo__rail-step-icon" aria-hidden="true">
+        <svg viewBox="0 0 18 18" fill="none" width="14" height="14">
+          <circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M5 9l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="ademo__rail-step-label">Results</span>
+    </button>
+  </nav>
+
+  <!-- ── Stage viewport ─────────────────────────────────────── -->
+  <div class="ademo__viewport">
+
+    <!-- ══ STAGE 1 : UPLOAD ══════════════════════════════════ -->
+    <div class="ademo__stage ademo__stage--upload demo-stage-card active"
+         id="demoStageUpload"
+         aria-label="Upload stage — active">
+
+      <form id="predictForm" action="/predict" method="post" enctype="multipart/form-data">
+      <div class="ademo__upload-layout">
+
+        <!-- Left: drop zone -->
+        <div class="ademo__dz-col">
+          <div class="ademo__dz" id="dropZoneUltimate"
+               role="button" tabindex="0"
+               aria-label="Drag and drop crowd images here, or press Enter to browse">
+
+            <input type="file" id="fileInputUltimate"
+                   name="file"
+                   accept=".jpg,.jpeg,.png,image/jpeg,image/png" hidden
+                   aria-label="Choose crowd scene images"/>
+
+            <!-- Idle state -->
+            <div class="ademo__dz-idle" id="adzIdle">
+              <!-- Animated icon -->
+              <div class="ademo__dz-orbit-system" aria-hidden="true">
+                <div class="ademo__dz-core">
+                  <svg viewBox="0 0 52 52" fill="none" width="34" height="34">
+                    <rect x="8" y="12" width="36" height="28" rx="5"
+                          stroke="currentColor" stroke-width="2"/>
+                    <path d="M8 22h36" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="26" cy="34" r="5" stroke="currentColor" stroke-width="2"/>
+                    <path d="M26 22v-8m-4 4 4-4 4 4"
+                          stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div class="ademo__dz-ring ademo__dz-ring--1"></div>
+                <div class="ademo__dz-ring ademo__dz-ring--2"></div>
+                <div class="ademo__dz-ring ademo__dz-ring--3"></div>
+              </div>
+
+              <h3 class="ademo__dz-title">Drop your crowd scene here</h3>
+              <p class="ademo__dz-sub">or click anywhere to browse files</p>
+
+              <div class="ademo__dz-formats" aria-label="Accepted file types">
+                <span class="ademo__fmt" aria-label="JPEG images">JPG</span>
+                <span class="ademo__fmt" aria-label="PNG images">PNG</span>
+              </div>
+
+              <div class="ademo__dz-meta" aria-hidden="true">
+                <span class="ademo__dz-meta-item">Encrypted transfer</span>
+                <span class="ademo__dz-meta-item">Auto validation</span>
+              </div>
+            </div>
+
+            <!-- Drag-over state (JS-toggled .ademo__dz--dragover) -->
+            <div class="ademo__dz-dragover" aria-hidden="true">
+              <svg viewBox="0 0 52 52" fill="none" width="48" height="48">
+                <path d="M26 8v28M14 20l12-12 12 12"
+                      stroke="currentColor" stroke-width="3"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M8 40h36" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+              </svg>
+              <p>Release to analyse</p>
+            </div>
+
+            <!-- File-loaded state (JS-toggled .ademo__dz--loaded) -->
+            <div class="ademo__dz-loaded" aria-hidden="true">
+              <div class="ademo__dz-loaded-icon" aria-hidden="true">
+                <svg viewBox="0 0 52 52" fill="none" width="36" height="36">
+                  <rect x="10" y="6" width="32" height="40" rx="4"
+                        stroke="currentColor" stroke-width="2"/>
+                  <path d="M18 18h16M18 26h16M18 34h10"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <p class="ademo__dz-file-name" id="adzFileName">—</p>
+              <p class="ademo__dz-file-size" id="adzFileSize">—</p>
+              <button class="ademo__dz-clear" id="adzClear" type="button"
+                      aria-label="Remove file">✕ Remove</button>
+            </div>
+
+            <!-- Always-visible scan-line animation -->
+            <div class="ademo__dz-scan" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <!-- Right: analysis action -->
+        <div class="ademo__sample-col">
+          <div class="ademo__analysis-card" aria-label="Backend analysis summary">
+            <div class="ademo__analysis-top">
+              <span class="ademo__analysis-kicker">Real Backend Analysis</span>
+              <span class="ademo__analysis-status">Engine Ready</span>
+            </div>
+            <h3 class="ademo__analysis-title">Server-Side Inference Pipeline</h3>
+
+            <div class="ademo__analysis-metrics" aria-hidden="true">
+              <div class="ademo__analysis-metric"><span>Model</span><strong>CSRNet v2.1</strong></div>
+              <div class="ademo__analysis-metric"><span>Runtime</span><strong>GPU accelerated</strong></div>
+              <div class="ademo__analysis-metric"><span>Latency</span><strong>&lt;30 ms</strong></div>
+            </div>
+
+            <!-- Run button -->
+            <button class="ademo__run-btn" id="simulateUploadBtn" type="submit">
+              <span class="ademo__run-btn__shine" aria-hidden="true"></span>
+              <svg viewBox="0 0 20 20" fill="none" width="18" height="18" aria-hidden="true">
+                <path d="M5 3.5 17 10 5 16.5V3.5z" fill="currentColor"/>
+              </svg>
+              Run AI Analysis
+            </button>
+
+            <!-- Model info strip -->
+          </div>
+        </div><!-- /.ademo__sample-col -->
+      </div><!-- /.ademo__upload-layout -->
+      </form>
+    </div><!-- /.ademo__stage--upload -->
+
+    <!-- ══ STAGE 2 : PROCESSING ══════════════════════════════ -->
+    <div class="ademo__stage ademo__stage--processing demo-stage-card"
+         id="demoStageProcessing"
+         aria-label="Processing stage" aria-live="polite">
+      <div class="ademo__proc-layout">
+        <div class="ademo__proc-canvas-col">
+          <div class="ademo__proc-canvas ademo__proc-canvas--status" aria-hidden="true">
+            <div class="ademo__proc-visual">
+              <div class="ademo__proc-ring ademo__proc-ring--outer"></div>
+              <div class="ademo__proc-ring ademo__proc-ring--mid"></div>
+              <div class="ademo__proc-ring ademo__proc-ring--inner"></div>
+              <div class="ademo__proc-core"></div>
+              <span class="ademo__proc-node ademo__proc-node--1"></span>
+              <span class="ademo__proc-node ademo__proc-node--2"></span>
+              <span class="ademo__proc-node ademo__proc-node--3"></span>
+              <span class="ademo__proc-node ademo__proc-node--4"></span>
+            </div>
+            <p class="ademo__proc-status-title">Running Backend Inference</p>
+            <p class="ademo__proc-status-sub">Preparing your density map and crowd count...</p>
+          </div>
+          <div class="ademo__proc-canvas-label">
+            <span class="ademo__proc-canvas-dot" aria-hidden="true"></span>
+            Server request in progress
+          </div>
+        </div>
+
+        <div class="ademo__proc-right">
+          <div class="ademo__steps" role="list" aria-label="Processing pipeline stages">
+            <div class="ademo__step done" role="listitem">
+              <div class="ademo__step-dot step-indicator"></div>
+              <div class="ademo__step-body step-content">
+                <strong>Upload Validation</strong>
+                <p>File integrity and format checks</p>
+              </div>
+              <span class="ademo__step-num" aria-hidden="true">01</span>
+            </div>
+            <div class="ademo__step active" role="listitem">
+              <div class="ademo__step-dot step-indicator"></div>
+              <div class="ademo__step-body step-content">
+                <strong>Model Inference</strong>
+                <p>Density regression on backend engine</p>
+              </div>
+              <span class="ademo__step-num" aria-hidden="true">02</span>
+            </div>
+            <div class="ademo__step" role="listitem">
+              <div class="ademo__step-dot step-indicator"></div>
+              <div class="ademo__step-body step-content">
+                <strong>Response Assembly</strong>
+                <p>Heatmap and metrics formatting</p>
+              </div>
+              <span class="ademo__step-num" aria-hidden="true">03</span>
+            </div>
+          </div>
+
+          <div class="ademo__progress-block">
+            <div class="ademo__progress-meta">
+              <span class="ademo__progress-stage" id="adeCurrentStage" aria-live="polite">Model warm-up...</span>
+              <span class="ademo__progress-pct" id="processingPercent" aria-live="polite" role="status">0%</span>
+            </div>
+            <div class="ademo__progress-track processing-progress-bar"
+                 role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                 aria-valuenow="0" aria-labelledby="adeCurrentStage">
+              <div class="ademo__progress-fill progress-bar-fill" id="processingProgress"></div>
+              <div class="ademo__progress-glow" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /.ademo__stage--processing -->
+
+
+    <!-- ══ STAGE 3 : RESULTS ═════════════════════════════════ -->
+    <div class="ademo__stage ademo__stage--results demo-stage-card"
+         id="demoStageResults"
+         aria-label="Analysis results stage">
+
+      <div class="ademo__results-layout">
+
+        <!-- ── Top row: big number + live heatmap canvas ───── -->
+        <div class="ademo__results-top">
+          <div class="ademo__results-col ademo__results-col--left">
+            <!-- Count hero card (keep IDs: resultCount) -->
+            <div class="ademo__count-card result-metric-box primary">
+              <span class="ademo__count-label result-label">Estimated Crowd</span>
+              <div class="ademo__count-num-row">
+                <span class="ademo__count-value result-value-huge" id="resultCount"
+                      aria-live="polite">{% if count is defined %}{{ count }}{% else %}0{% endif %}</span>
+                <span class="ademo__count-unit result-unit">people</span>
+              </div>
+              <div class="ademo__count-density-bar" aria-hidden="true">
+                <div class="ademo__count-density-fill" id="adeCountBar"></div>
+              </div>
+            </div>
+
+            {% if uploaded_image %}
+            <div class="ademo__heatmap-card results-heatmap-preview ademo__upload-card" id="backendImageGrid">
+              <div class="ademo__heatmap-header">
+                <h4 class="ademo__heatmap-title heatmap-title">Uploaded Image</h4>
+              </div>
+              <div class="ademo__heatmap-canvas-wrap">
+                <img src="{{ url_for('static', filename='uploads/' ~ uploaded_image) }}" alt="Uploaded image" class="ademo__result-image" />
+              </div>
+            </div>
+            {% endif %}
+          </div>
+
+          <!-- Heatmap (keep IDs: heatmapCanvas) -->
+          <div class="ademo__heatmap-card results-heatmap-preview ademo__results-col--right">
+            <div class="ademo__heatmap-header">
+              <h4 class="ademo__heatmap-title heatmap-title">Density Heatmap</h4>
+              <div class="ademo__heatmap-legend" aria-label="Heat level legend">
+                <span class="ademo__legend">
+                  <span class="ademo__legend-swatch ademo__legend-swatch--lo"
+                        aria-hidden="true"></span>Low
+                </span>
+                <span class="ademo__legend">
+                  <span class="ademo__legend-swatch ademo__legend-swatch--mid"
+                        aria-hidden="true"></span>Med
+                </span>
+                <span class="ademo__legend">
+                  <span class="ademo__legend-swatch ademo__legend-swatch--hi"
+                        aria-hidden="true"></span>High
+                </span>
+              </div>
+            </div>
+            <div class="ademo__heatmap-canvas-wrap heatmap-visual">
+              {% if result_image %}
+              <img src="{{ url_for('static', filename='uploads/' ~ result_image) }}"
+                   alt="Crowd density heatmap result"
+                   class="ademo__result-image ademo__result-image--heatmap" />
+              {% else %}
+              <canvas id="heatmapCanvas" class="ademo__heatmap-canvas"
+                      width="400" height="220"
+                      aria-label="Crowd density heatmap result"></canvas>
+              {% endif %}
+              <!-- Corner bracket decorations -->
+              <span class="ademo__hm-corner ademo__hm-corner--tl" aria-hidden="true"></span>
+              <span class="ademo__hm-corner ademo__hm-corner--tr" aria-hidden="true"></span>
+              <span class="ademo__hm-corner ademo__hm-corner--bl" aria-hidden="true"></span>
+              <span class="ademo__hm-corner ademo__hm-corner--br" aria-hidden="true"></span>
+              <!-- Zone labels -->
+              <span class="ademo__zone-lbl ademo__zone-lbl--nw" aria-hidden="true">NW</span>
+              <span class="ademo__zone-lbl ademo__zone-lbl--ne" aria-hidden="true">NE</span>
+              <span class="ademo__zone-lbl ademo__zone-lbl--sw" aria-hidden="true">SW</span>
+              <span class="ademo__zone-lbl ademo__zone-lbl--se" aria-hidden="true">SE</span>
+            </div>
+          </div>
+        </div><!-- /.ademo__results-top -->
+
+        <!-- ── Secondary metric cards (keep IDs) ──────────── -->
+        <div class="ademo__metrics-row results-display-grid">
+
+          <div class="ademo__metric-card result-metric-box">
+            <span class="ademo__metric-label result-label">Confidence</span>
+            <span class="ademo__metric-value result-value" id="resultConfidence"
+                  aria-live="polite">{% if confidence is defined %}{{ confidence }}%{% else %}—{% endif %}</span>
+            <div class="ademo__metric-bar-track" aria-hidden="true">
+              <div class="ademo__metric-bar-fill ademo__metric-bar-fill--green"
+                   id="adeConfBar" style="width:{% if confidence is defined %}{{ confidence }}{% else %}0{% endif %}%"></div>
+            </div>
+          </div>
+
+          <div class="ademo__metric-card result-metric-box">
+            <span class="ademo__metric-label result-label">Process Time</span>
+            <span class="ademo__metric-value result-value" id="resultTime"
+                  aria-live="polite">{% if process_time_ms is defined %}{{ process_time_ms }} ms{% else %}—{% endif %}</span>
+            <span class="ademo__metric-sub">&lt;30 ms target</span>
+          </div>
+
+          <div class="ademo__metric-card result-metric-box">
+            <span class="ademo__metric-label result-label">Density Level</span>
+            <span class="ademo__metric-value result-value" id="adeDensityLevel"
+                  aria-live="polite">{% if density_level is defined %}{{ density_level }}{% else %}—{% endif %}</span>
+            <div class="ademo__metric-dots" id="adeDensityDots" aria-hidden="true"></div>
+          </div>
+
+          <div class="ademo__metric-card result-metric-box">
+            <span class="ademo__metric-label result-label">Model</span>
+            <span class="ademo__metric-value result-value">v2.1.0</span>
+            <span class="ademo__metric-sub">CSRNet Architecture</span>
+          </div>
+
+        </div><!-- /.ademo__metrics-row -->
+
+        <!-- ── AI insight callout ──────────────────────────── -->
+        <div class="ademo__insight" id="adeInsight" aria-live="polite">
+          <span class="ademo__insight-icon" aria-hidden="true">
+            <svg viewBox="0 0 18 18" fill="none" width="14" height="14">
+              <circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M9 5.5v4M9 12h.01" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <p class="ademo__insight-text" id="adeInsightText">
+            {% if insight_message %}{{ insight_message }}{% else %}Analysis ready.{% endif %}
+          </p>
+        </div>
+
+        <!-- ── Action buttons (keep IDs: resetDemoBtn) ─────── -->
+        <div class="ademo__result-actions results-actions">
+          <button class="ademo__action-btn ademo__action-btn--primary demo-action-btn primary"
+                  type="button" id="adeDownloadBtn"
+                  data-count="{% if count is defined %}{{ count }}{% endif %}"
+                  data-confidence="{% if confidence is defined %}{{ confidence }}{% endif %}"
+                  data-process="{% if process_time_ms is defined %}{{ process_time_ms }}{% endif %}"
+                  data-density="{% if density_level is defined %}{{ density_level }}{% endif %}"
+                  data-uploaded="{% if uploaded_image %}{{ uploaded_image }}{% endif %}"
+                  data-result="{% if result_image %}{{ result_image }}{% endif %}">
+            <svg viewBox="0 0 18 18" fill="none" width="16" height="16" aria-hidden="true">
+              <path d="M9 2v10M5 8l4 4 4-4M2 15h14"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Download Report
+          </button>
+          <button class="ademo__action-btn demo-action-btn"
+                  type="button" id="resetDemoBtn">
+            <svg viewBox="0 0 18 18" fill="none" width="16" height="16" aria-hidden="true">
+              <path d="M3.5 9a5.5 5.5 0 1 0 1-3.3M3.5 3.5v4h4"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Run Another
+          </button>
+        </div>
+
+      </div><!-- /.ademo__results-layout -->
+    </div><!-- /.ademo__stage--results -->
+
+  </div><!-- /.ademo__viewport -->
+  </div><!-- /.ademo -->
+  {% if error_message %}
+  <section style="max-width:1100px;margin:18px auto 0;padding:0 24px;">
+    <div style="border:1px solid rgba(255,95,110,.45);background:rgba(255,95,110,.12);color:#ffd7dc;border-radius:12px;padding:12px 14px;">
+      {{ error_message }}
+    </div>
+  </section>
+  {% endif %}
+  <!-- ╔════════════════════════════════════════╗
+       ║  CAPABILITIES BENTO GRID               ║
+       ╚════════════════════════════════════════╝ -->
+  <div class="hc-bento" aria-label="Core capabilities">
+    <div class="hc-bento__header">
+      <h2 class="hc-section-title">What We Built In This <span class="hc-gradient-word">Academic Project</span></h2>
+    </div>
+
+    <div class="hc-bento__grid" role="list">
+
+      <!-- Card 1 — large -->
+      <article class="hc-bcard hc-bcard--large hc-bcard--cyan" role="listitem" tabindex="0">
+        <div class="hc-bcard__bg" aria-hidden="true"></div>
+        <div class="hc-bcard__icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" width="32" height="32">
+            <path d="M16 2L2 9l14 7 14-7-14-7zM2 23l14 7 14-7M2 16l14 7 14-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="hc-bcard__title">Adaptive Learning</h3>
+        <p class="hc-bcard__desc">Model behavior is continuously refined through iterative experiments, dataset tuning, and evaluation-driven improvements.</p>
+        <div class="hc-bcard__chip">Iterative Training</div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="hc-bcard hc-bcard--purple" role="listitem" tabindex="0">
+        <div class="hc-bcard__bg" aria-hidden="true"></div>
+        <div class="hc-bcard__icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" width="28" height="28">
+            <path d="M16 4L4 10v12l12 6 12-6V10L16 4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="hc-bcard__title">Real-Time Processing</h3>
+        <p class="hc-bcard__desc">Optimized inference pipeline enables near real-time crowd-density estimation with efficient processing flow.</p>
+        <div class="hc-bcard__chip">Low Latency</div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="hc-bcard hc-bcard--green" role="listitem" tabindex="0">
+        <div class="hc-bcard__bg" aria-hidden="true"></div>
+        <div class="hc-bcard__icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" width="28" height="28">
+            <circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2"/>
+            <path d="M10 16l4 4 8-8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="hc-bcard__title">Multi-Camera Support</h3>
+        <p class="hc-bcard__desc">Designed to process feeds from multiple camera viewpoints for broader scene coverage and better density mapping.</p>
+        <div class="hc-bcard__chip">Multi-View Input</div>
+      </article>
+
+      <!-- Card 4 — large -->
+      <article class="hc-bcard hc-bcard--large hc-bcard--orange" role="listitem" tabindex="0">
+        <div class="hc-bcard__bg" aria-hidden="true"></div>
+        <div class="hc-bcard__icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" width="32" height="32">
+            <circle cx="16" cy="10" r="7" stroke="currentColor" stroke-width="2"/>
+            <path d="M8 20s-4 1-4 6h24c0-5-4-6-4-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="hc-bcard__title">Edge Deployment</h3>
+        <p class="hc-bcard__desc">Architecture is prepared for edge-oriented execution patterns to reduce latency and improve deployment flexibility.</p>
+        <div class="hc-bcard__chip">Edge-Ready Design</div>
+      </article>
+
+    </div>
+  </div>
+
+</section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="../static/app.js"></script>
+<!-- moved to /static/app.js -->
+{% if count is defined %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const uploadStage = document.getElementById('demoStageUpload');
+    const processingStage = document.getElementById('demoStageProcessing');
+    const resultsStage = document.getElementById('demoStageResults');
+    if (uploadStage) uploadStage.classList.remove('active');
+    if (processingStage) processingStage.classList.remove('active');
+    if (resultsStage) resultsStage.classList.add('active');
+
+    const countEl = document.getElementById('resultCount');
+    if (countEl) countEl.textContent = '{{ count }}';
+    const confEl = document.getElementById('resultConfidence');
+    if (confEl) confEl.textContent = '{{ confidence if confidence is defined else "—" }}{% if confidence is defined %}%{% endif %}';
+    const timeEl = document.getElementById('resultTime');
+    if (timeEl) timeEl.textContent = '{% if process_time_ms is defined %}{{ process_time_ms }} ms{% else %}—{% endif %}';
+    const levelEl = document.getElementById('adeDensityLevel');
+    if (levelEl) levelEl.textContent = '{{ density_level if density_level is defined else "—" }}';
+    const insightEl = document.getElementById('adeInsightText');
+    if (insightEl) insightEl.textContent = '{{ insight_message if insight_message else "Server-side analysis completed successfully." }}';
+    const confBar = document.getElementById('adeConfBar');
+    if (confBar) confBar.style.width = '{% if confidence is defined %}{{ confidence }}{% else %}0{% endif %}%';
+    const countBar = document.getElementById('adeCountBar');
+    if (countBar) countBar.style.width = '{% if count is defined %}{{ [100, ((count / 2000.0) * 100) | round(1)] | min }}{% else %}0{% endif %}%';
+    const dots = document.getElementById('adeDensityDots');
+    if (dots) {
+      const level = '{{ density_level if density_level else "Low" }}';
+      const mapping = { Low: 1, Medium: 2, High: 4, Critical: 5 };
+      const filled = mapping[level] || 1;
+      const color = level === 'Critical' ? '#ff4f5e' : (level === 'High' ? '#ff8c42' : '#00e676');
+      dots.innerHTML = '';
+      for (let i = 0; i < 5; i += 1) {
+        const d = document.createElement('span');
+        d.style.cssText = `display:inline-block;width:10px;height:10px;border-radius:3px;margin:0 2px;background:${i < filled ? color : 'rgba(255,255,255,0.1)'};border:1px solid ${i < filled ? color : 'rgba(255,255,255,0.06)'};`;
+        dots.appendChild(d);
+      }
+    }
+
+    const uploadStep = document.getElementById('ademoRailUpload');
+    const processStep = document.getElementById('ademoRailProcess');
+    const resultStep = document.getElementById('ademoRailResults');
+    if (uploadStep) uploadStep.classList.add('ademo__rail-step--done');
+    if (processStep) processStep.classList.add('ademo__rail-step--done');
+    if (resultStep) {
+      resultStep.classList.add('ademo__rail-step--active');
+      resultStep.setAttribute('aria-current', 'step');
+    }
+    const rail = document.getElementById('ademoPipelineProgress');
+    if (rail) rail.style.width = '100%';
+
+    const resultsStageRoot = document.getElementById('demoStageResults');
+    if (resultsStageRoot) {
+      resultsStageRoot.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+</script>
+{% endif %}
+</body>
+</html>

@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="High-performance density map regression for adaptive crowd analytics using deep learning." />
+  <title>High-Performance Density Map Regression | Adaptive Crowd Analytica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&amp;family=Poppins:wght@300;400;500;600;700&amp;family=IBM+Plex+Mono:wght@300;400;500&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../static/styles.css" />
+  <style>
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0;
+      margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
+      white-space: nowrap; border: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-ring"></div>
+    <div class="loader-text">Initializing AI Interface...</div>
+  </div>
+  <div class="page-transition" id="pageTransition" aria-hidden="true"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <canvas id="shaderBg" aria-hidden="true"></canvas>
+  <div id="particles-js" aria-hidden="true"></div>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-grid-perspective" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+  <div class="bg-orb orb-1" aria-hidden="true"></div>
+  <div class="bg-orb orb-2" aria-hidden="true"></div>
+  <div class="bg-orb orb-3" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo logo-anim">HP</div>
+      <div class="brand-text">
+        <span class="brand-title">High-Performance Density Map Regression</span>
+        <span class="brand-sub">Adaptive Crowd Analytica</span>
+      </div>
+    </div>
+    <nav class="tabs" role="navigation" aria-label="Primary navigation">
+      <span class="tab-indicator" aria-hidden="true"></span>
+      <a class="tab" role="tab" aria-selected="false" href="./home.html">Home</a>
+      <a class="tab" role="tab" aria-selected="false" href="./scope.html">Scope</a>
+      <a class="tab" role="tab" aria-selected="false" href="./team.html">Team</a>
+      <a class="tab active" role="tab" aria-selected="true" href="./about.html">About</a>
+    </nav>
+  </header>
+
+  <main role="main">
+    <section id="about" class="panel active" role="tabpanel">
+      <div class="ab-page" id="aboutResearch" data-aos="fade-up">
+
+        <!-- ── HERO HEADER ── -->
+        <header class="ab-hero">
+          <span class="ab-eyebrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+              <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2" stroke-dasharray="2 4"/>
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+            </svg>
+            AI Research · 2026
+          </span>
+          <h2 class="ab-hero-title">Adaptive Crowd Analytics</h2>
+          <p class="ab-hero-sub">High-Performance Density Map Regression using Deep Learning — real-time crowd estimation at pixel level.</p>
+          <div class="ab-hero-stats">
+            <div class="ab-stat"><span class="ab-stat-val" data-target="85">0</span><span class="ab-stat-unit">%</span><span class="ab-stat-lbl">Accuracy</span></div>
+            <div class="ab-stat-divider"></div>
+            <div class="ab-stat"><span class="ab-stat-val" data-target="30">0</span><span class="ab-stat-unit"> FPS</span><span class="ab-stat-lbl">Real-time Speed</span></div>
+            <div class="ab-stat-divider"></div>
+            <div class="ab-stat"><span class="ab-stat-val" data-target="12">0</span><span class="ab-stat-unit"> Layers</span><span class="ab-stat-lbl">Architecture Depth</span></div>
+          </div>
+        </header>
+
+        <!-- ── PROBLEM → SOLUTION ── -->
+        <section class="ab-block" aria-label="Problem and Solution">
+          <h3 class="ab-block-title">Problem → Solution</h3>
+          <div class="ab-ps-row">
+            <div class="ab-ps-card ab-ps-problem">
+              <div class="ab-ps-icon">⚠️</div>
+              <h4>The Challenge</h4>
+              <p>Traditional crowd counting fails in dense, overlapping scenes. Manual annotation is slow, error-prone, and doesn't scale to real-time needs.</p>
+              <ul class="ab-ps-list">
+                <li>Head detection fails at high density</li>
+                <li>No pixel-level spatial context</li>
+                <li>Cannot run at inference speed</li>
+              </ul>
+            </div>
+            <div class="ab-ps-arrow" aria-hidden="true">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                <path d="M5 12H19M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="ab-ps-card ab-ps-solution">
+              <div class="ab-ps-icon">✦</div>
+              <h4>Our Solution</h4>
+              <p>Density Map Regression via a deep CNN backbone — each pixel produces a density value, and summing the map gives the precise crowd count.</p>
+              <ul class="ab-ps-list">
+                <li>Pixel-level density estimation</li>
+                <li>End-to-end trainable pipeline</li>
+                <li>Real-time 30 FPS inference</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── MODEL PIPELINE ── -->
+        <section class="ab-block" aria-label="Model Pipeline">
+          <h3 class="ab-block-title">Model Pipeline</h3>
+          <div class="ab-pipeline">
+            <div class="ab-pipe-node" data-tip="Raw video frames from camera feed">
+              <div class="ab-pipe-icon">📷</div>
+              <span class="ab-pipe-label">Camera Input</span>
+              <span class="ab-pipe-step">01</span>
+            </div>
+            <div class="ab-pipe-connector"><div class="ab-pipe-flow"></div></div>
+            <div class="ab-pipe-node" data-tip="Resize, normalize, augment">
+              <div class="ab-pipe-icon">⚙️</div>
+              <span class="ab-pipe-label">Pre-processing</span>
+              <span class="ab-pipe-step">02</span>
+            </div>
+            <div class="ab-pipe-connector"><div class="ab-pipe-flow"></div></div>
+            <div class="ab-pipe-node" data-tip="VGG-16 / ResNet backbone extracts spatial features">
+              <div class="ab-pipe-icon">🧠</div>
+              <span class="ab-pipe-label">CNN Backbone</span>
+              <span class="ab-pipe-step">03</span>
+            </div>
+            <div class="ab-pipe-connector"><div class="ab-pipe-flow"></div></div>
+            <div class="ab-pipe-node" data-tip="Upsampling + conv layers produce density output">
+              <div class="ab-pipe-icon">📊</div>
+              <span class="ab-pipe-label">Density Map</span>
+              <span class="ab-pipe-step">04</span>
+            </div>
+            <div class="ab-pipe-connector"><div class="ab-pipe-flow"></div></div>
+            <div class="ab-pipe-node" data-tip="Integral of density map = crowd count">
+              <div class="ab-pipe-icon">🔢</div>
+              <span class="ab-pipe-label">Count Output</span>
+              <span class="ab-pipe-step">05</span>
+            </div>
+            <!-- tooltip shown via JS -->
+            <div class="ab-pipe-tooltip" id="abPipeTip" role="tooltip" aria-live="polite"></div>
+          </div>
+        </section>
+
+        <!-- ── ARCHITECTURE (RECTANGULAR) ── -->
+        <div class="ab-wide-stack">
+          <section class="ab-block ab-block-arch ab-block-wide" aria-label="Architecture Specs">
+            <h3 class="ab-block-title">Architecture</h3>
+            <figure class="ab-arch-figure ab-arch-figure--wide">
+              <img src="{{ url_for('static', filename='media/about-architecture.jpg') }}"
+                   alt="Architecture pipeline: input image, feature extraction, enhancement, density map generation, and crowd count output."
+                   class="ab-arch-img" />
+              <figcaption class="ab-arch-caption">
+                End-to-end pipeline overview: multi-scale feature extraction, weighted fusion, density map generation, and final crowd count.
+              </figcaption>
+            </figure>
+            <dl class="ab-arch-specs">
+              <dt>Backbone</dt><dd>VGG-16 + Multi‑Scale CNN</dd>
+              <dt>Fusion</dt><dd>Weighted Feature Enhancement</dd>
+              <dt>Density Head</dt><dd>Transposed Convolution</dd>
+              <dt>Losses</dt><dd>SSIM + Patch Consistency</dd>
+            </dl>
+          </section>
+
+          <!-- Technology Stack (wide rail) -->
+          <section class="ab-block ab-block-tech ab-block-wide" aria-label="Technology Stack">
+            <h3 class="ab-block-title">Tech Stack</h3>
+            <div class="ab-tech-rail">
+              <div class="ab-tech-group">
+                <span class="ab-tech-group-label">Frontend</span>
+                <span class="ab-pill ab-pill-blue">HTML5</span>
+                <span class="ab-pill ab-pill-blue">CSS3</span>
+                <span class="ab-pill ab-pill-blue">JS ES6+</span>
+              </div>
+              <div class="ab-tech-group">
+                <span class="ab-tech-group-label">Backend</span>
+                <span class="ab-pill ab-pill-green">Python 3.9+</span>
+                <span class="ab-pill ab-pill-green">Flask</span>
+              </div>
+              <div class="ab-tech-group">
+                <span class="ab-tech-group-label">AI / ML</span>
+                <span class="ab-pill ab-pill-rose">PyTorch</span>
+                <span class="ab-pill ab-pill-rose">TensorFlow</span>
+                <span class="ab-pill ab-pill-rose">OpenCV</span>
+                <span class="ab-pill ab-pill-rose">NumPy</span>
+              </div>
+              <div class="ab-tech-group">
+                <span class="ab-tech-group-label">Tooling</span>
+                <span class="ab-pill ab-pill-amber">CUDA 11+</span>
+                <span class="ab-pill ab-pill-amber">Docker</span>
+                <span class="ab-pill ab-pill-amber">Git</span>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- ── PERFORMANCE METRICS ── -->
+        <section class="ab-block" aria-label="Performance Metrics">
+          <h3 class="ab-block-title">Results &amp; Performance</h3>
+          <div class="ab-metrics-grid">
+
+            <div class="ab-metric-card">
+              <div class="ab-gauge-wrap">
+                <svg class="ab-gauge-svg" viewBox="0 0 100 100" role="img" aria-label="85% Density Accuracy">
+                  <circle class="ab-gauge-bg" cx="50" cy="50" r="38"/>
+                  <circle class="ab-gauge-fill" cx="50" cy="50" r="38" data-pct="85"
+                    style="stroke-dasharray: 238.76; stroke-dashoffset: 238.76;"/>
+                </svg>
+                <div class="ab-gauge-center">
+                  <span class="ab-gauge-val" data-target="85">0</span>
+                  <span class="ab-gauge-unit">%</span>
+                </div>
+              </div>
+              <h4>Density Accuracy</h4>
+              <p>Pixel-level estimation across varied densities</p>
+            </div>
+
+            <div class="ab-metric-card">
+              <div class="ab-bar-metric">
+                <div class="ab-bar-row">
+                  <span>Inference Speed</span>
+                  <strong>30 FPS</strong>
+                </div>
+                <div class="ab-bar-track"><div class="ab-bar-fill" data-pct="87" style="width:0%"></div></div>
+                <div class="ab-bar-row">
+                  <span>Model Efficiency</span>
+                  <strong>82%</strong>
+                </div>
+                <div class="ab-bar-track"><div class="ab-bar-fill ab-bar-fill-2" data-pct="82" style="width:0%"></div></div>
+                <div class="ab-bar-row">
+                  <span>MAE Score</span>
+                  <strong>6.3</strong>
+                </div>
+                <div class="ab-bar-track"><div class="ab-bar-fill ab-bar-fill-3" data-pct="74" style="width:0%"></div></div>
+              </div>
+              <h4>Model Performance</h4>
+              <p>Benchmarked on ShanghaiTech Part A &amp; B</p>
+            </div>
+
+            <div class="ab-metric-card ab-metric-card-wide">
+              <h4>Technology Timeline</h4>
+              <div class="ab-timeline">
+                <div class="ab-tl-item ab-tl-done">
+                  <div class="ab-tl-dot"></div>
+                  <div class="ab-tl-body">
+                    <strong>2020 — Foundation</strong>
+                    <p>Core CNN architecture & dataset pipeline established</p>
+                  </div>
+                </div>
+                <div class="ab-tl-item ab-tl-done">
+                  <div class="ab-tl-dot"></div>
+                  <div class="ab-tl-body">
+                    <strong>2022 — AI Integration</strong>
+                    <p>Deep learning models integrated with density regression</p>
+                  </div>
+                </div>
+                <div class="ab-tl-item ab-tl-done">
+                  <div class="ab-tl-dot"></div>
+                  <div class="ab-tl-body">
+                    <strong>2024 — Real-time Processing</strong>
+                    <p>Achieved 30 FPS inference on consumer GPU hardware</p>
+                  </div>
+                </div>
+                <div class="ab-tl-item">
+                  <div class="ab-tl-dot"></div>
+                  <div class="ab-tl-body">
+                    <strong>2026 — Edge AI</strong>
+                    <p>Optimized for low-power edge deployment (in progress)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── APPLICATIONS ── -->
+        <section class="ab-block" aria-label="Real-world Applications">
+          <h3 class="ab-block-title">Real-World Applications</h3>
+          <div class="ab-apps-grid">
+            <div class="ab-app-card">
+              <div class="ab-app-icon">🏙️</div>
+              <h4>Smart Cities</h4>
+              <p>Urban traffic and crowd flow management for city planners and transit authorities</p>
+            </div>
+            <div class="ab-app-card">
+              <div class="ab-app-icon">🎤</div>
+              <h4>Event Monitoring</h4>
+              <p>Concert halls, stadiums, and festival venues get real-time occupancy and safety data</p>
+            </div>
+            <div class="ab-app-card">
+              <div class="ab-app-icon">🚨</div>
+              <h4>Disaster Response</h4>
+              <p>Emergency services use density maps to plan evacuation routes during critical events</p>
+            </div>
+            <div class="ab-app-card">
+              <div class="ab-app-icon">🛡️</div>
+              <h4>Public Safety</h4>
+              <p>Surveillance and security teams monitor crowd buildup to prevent incidents proactively</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── RESEARCH CONTRIBUTIONS ── -->
+        <section class="ab-block ab-block-contrib" aria-label="Research Contributions">
+          <h3 class="ab-block-title">Research Contributions</h3>
+          <div class="ab-contrib-grid">
+            <div class="ab-contrib-card">
+              <span class="ab-contrib-num">01</span>
+              <h4>Real-time Density Regression Pipeline</h4>
+              <p>Novel end-to-end architecture enabling live crowd estimation at 30 FPS with sub-10 MAE scores on standard benchmarks.</p>
+            </div>
+            <div class="ab-contrib-card">
+              <span class="ab-contrib-num">02</span>
+              <h4>Adaptive Crowd Scaling</h4>
+              <p>Dynamic density-aware feature scaling that adjusts internal representations based on estimated crowd magnitude.</p>
+            </div>
+            <div class="ab-contrib-card">
+              <span class="ab-contrib-num">03</span>
+              <h4>Integration-Ready Architecture</h4>
+              <p>Fully modular Flask + PyTorch backend with REST API, enabling plug-and-play deployment into existing security infrastructure.</p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </section>
+  </main>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script defer src="../static/app.js"></script>
+</body>
+</html>

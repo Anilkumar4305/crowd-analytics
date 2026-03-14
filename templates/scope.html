@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Explore the future scope and scalability of our AI-powered crowd analytics system for smart cities, event monitoring, disaster management, and public safety." />
+  <meta property="og:title" content="Future Scope &amp; Scalability | Crowd Analytics System" />
+  <meta property="og:description" content="Extending AI-powered density estimation to smart cities, event monitoring, disaster management, and public safety applications." />
+  <title>High-Performance Density Map Regression | Adaptive Crowd Analytica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&amp;family=Poppins:wght@300;400;500;600;700&amp;family=IBM+Plex+Mono:wght@300;400;500&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../static/styles.css" />
+  <style>
+    .scope-tags ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .scope-tags li {
+      display: inline;
+    }
+
+    .scope-card-vision:focus,
+    .scope-card-vision:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+      transform: translateY(-4px);
+    }
+
+    .scope-vision {
+      opacity: 0;
+      animation: fadeInScope 0.6s ease 0.2s forwards;
+    }
+
+    @keyframes fadeInScope {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .no-js .scope-vision {
+      opacity: 1;
+      animation: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .scope-card-vision,
+      .net-line,
+      .city-line,
+      .event-pulse,
+      .alert-scan,
+      .radar-ring,
+      .radar-sweep {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="no-js">
+  <script>
+    document.body.classList.remove('no-js');
+  </script>
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-ring"></div>
+    <div class="loader-text">Initializing AI Interface...</div>
+  </div>
+  <div class="page-transition" id="pageTransition" aria-hidden="true"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <canvas id="shaderBg" aria-hidden="true"></canvas>
+  <div id="particles-js" aria-hidden="true"></div>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-grid-perspective" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+  <div class="bg-orb orb-1" aria-hidden="true"></div>
+  <div class="bg-orb orb-2" aria-hidden="true"></div>
+  <div class="bg-orb orb-3" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo logo-anim">HP</div>
+      <div class="brand-text">
+        <span class="brand-title">High-Performance Density Map Regression</span>
+        <span class="brand-sub">Adaptive Crowd Analytica</span>
+      </div>
+    </div>
+    <nav class="tabs" role="navigation" aria-label="Primary navigation">
+      <span class="tab-indicator" aria-hidden="true"></span>
+      <a class="tab" role="tab" aria-selected="false" href="./home.html">Home</a>
+      <a class="tab active" role="tab" aria-selected="true" href="./scope.html">Scope</a>
+      <a class="tab" role="tab" aria-selected="false" href="./team.html">Team</a>
+      <a class="tab" role="tab" aria-selected="false" href="./about.html">About</a>
+    </nav>
+  </header>
+
+  <main role="main">
+  <section id="scope" class="panel active" role="tabpanel">
+    <div class="scope-vision scope-ultimate" id="scopeVision">
+
+      <header class="scope-hero-header">
+        <div class="scope-hero-bg">
+          <canvas id="meshCanvas" aria-hidden="true"></canvas>
+        </div>
+        <div class="scope-hero-content">
+          <h1 class="scope-hero-title">
+            How We <span class="gradient-text-scope">Scale</span> &amp;<br>
+            <span class="gradient-text-scope">Improve</span> This System
+          </h1>
+          <p class="scope-hero-sub">
+            A practical academic roadmap - from model improvement to pilot-ready implementation.
+            Six focused directions to strengthen this final-year major project.
+          </p>
+          <div class="scope-hero-stats">
+            <div class="hero-stat">
+              <span class="hero-stat-val" data-counter-scope data-target="3">0</span><span class="hero-stat-unit">x</span>
+              <span class="hero-stat-label">Model optimization target</span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-val" data-counter-scope data-target="85">0</span><span class="hero-stat-unit">%</span>
+              <span class="hero-stat-label">Validation accuracy target</span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-val" data-counter-scope data-target="60">0</span><span class="hero-stat-unit">ms</span>
+              <span class="hero-stat-label">Inference latency target</span>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-val" data-counter-scope data-target="12">0</span><span class="hero-stat-unit">+</span>
+              <span class="hero-stat-label">Evaluation scenarios</span>
+            </div>
+          </div>
+        </div>
+        <div class="scope-hero-visual" aria-label="Scope hero video preview">
+          <video class="scope-hero-video"
+                 autoplay
+                 muted
+                 loop
+                 playsinline
+                 preload="metadata"
+                 aria-label="Crowd analytics scope preview video">
+            <source src="../static/media/scope-hero-video.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </header>
+
+      <section class="scope-pillars-section" aria-labelledby="pillars-heading">
+        <div class="section-label-group">
+          <h2 id="pillars-heading" class="section-heading-scope">
+            Six Pillars of <span class="gradient-text-scope">System Improvement</span>
+          </h2>
+          <p class="section-sub-scope">Each dimension directly addresses a current limitation in the system.</p>
+        </div>
+
+        <div class="pillars-grid" role="list">
+          <article class="pillar-card" role="listitem" tabindex="0" data-pillar="model">
+            <div class="pillar-icon-ring">
+              <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                <circle cx="24" cy="24" r="20" stroke="var(--accent)" stroke-width="1.5" opacity="0.3"/>
+                <path d="M16 24l5 5 11-11" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="pillar-number mono">01</div>
+            <h3 class="pillar-title">Model Architecture Upgrade</h3>
+            <p class="pillar-body">Experiment with stronger backbones and attention modules to reduce MAE and improve crowd estimation in mixed scenes.</p>
+            <div class="pillar-delta">
+              <span class="delta-label">MAE Target</span>
+              <span class="delta-value accent">-20%</span>
+            </div>
+            <div class="pillar-progress-bar" aria-hidden="true">
+              <div class="pillar-progress-fill" style="--target-width: 78%"></div>
+            </div>
+            <div class="pillar-tags">
+              <span class="scope-tag">EfficientDet</span>
+              <span class="scope-tag">Attention Gates</span>
+              <span class="scope-tag">Multi-Scale</span>
+            </div>
+          </article>
+
+          <article class="pillar-card" role="listitem" tabindex="0" data-pillar="edge">
+            <div class="pillar-icon-ring">
+              <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                <rect x="8" y="14" width="14" height="10" rx="2" stroke="var(--accent-2)" stroke-width="1.5"/>
+                <rect x="26" y="14" width="14" height="10" rx="2" stroke="var(--accent-2)" stroke-width="1.5"/>
+                <rect x="17" y="28" width="14" height="10" rx="2" stroke="var(--accent-2)" stroke-width="1.5"/>
+                <path d="M15 24h-3M33 24h3M24 24v4" stroke="var(--accent-2)" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="pillar-number mono">02</div>
+            <h3 class="pillar-title">Edge AI Inference</h3>
+            <p class="pillar-body">Prepare quantized models for edge-friendly inference and benchmark latency improvements on limited hardware setups.</p>
+            <div class="pillar-delta">
+              <span class="delta-label">Latency Goal</span>
+              <span class="delta-value accent">&lt;60ms</span>
+            </div>
+            <div class="pillar-progress-bar" aria-hidden="true">
+              <div class="pillar-progress-fill" style="--target-width: 91%"></div>
+            </div>
+            <div class="pillar-tags">
+              <span class="scope-tag">INT8 Quantization</span>
+              <span class="scope-tag">Jetson Orin</span>
+              <span class="scope-tag">TensorRT</span>
+            </div>
+          </article>
+
+          <article class="pillar-card" role="listitem" tabindex="0" data-pillar="federated">
+            <div class="pillar-icon-ring">
+              <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                <circle cx="24" cy="24" r="5" stroke="var(--accent)" stroke-width="2"/>
+                <circle cx="10" cy="12" r="3" stroke="var(--accent)" stroke-width="1.5"/>
+                <circle cx="38" cy="12" r="3" stroke="var(--accent)" stroke-width="1.5"/>
+                <circle cx="10" cy="36" r="3" stroke="var(--accent)" stroke-width="1.5"/>
+                <circle cx="38" cy="36" r="3" stroke="var(--accent)" stroke-width="1.5"/>
+                <path d="M13 14l8 7M27 27l8 7M35 14l-8 7M21 27l-8 7" stroke="var(--accent)" stroke-width="1" opacity="0.6"/>
+              </svg>
+            </div>
+            <div class="pillar-number mono">03</div>
+            <h3 class="pillar-title">Federated Learning</h3>
+            <p class="pillar-body">Study federated-learning workflows in simulation to improve privacy-aware training without centralized raw data sharing.</p>
+            <div class="pillar-delta">
+              <span class="delta-label">Research Outcome</span>
+              <span class="delta-value accent">Prototype Study</span>
+            </div>
+            <div class="pillar-progress-bar" aria-hidden="true">
+              <div class="pillar-progress-fill" style="--target-width: 62%"></div>
+            </div>
+            <div class="pillar-tags">
+              <span class="scope-tag">Federated</span>
+              <span class="scope-tag">Privacy-First</span>
+              <span class="scope-tag">Gradient Agg.</span>
+            </div>
+          </article>
+
+          <article class="pillar-card" role="listitem" tabindex="0" data-pillar="multimodal">
+            <div class="pillar-icon-ring">
+              <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                <path d="M8 32l8-12 8 6 8-14 8 8" stroke="var(--accent-3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="12" cy="38" r="2" fill="var(--accent-3)" opacity="0.5"/>
+                <circle cx="24" cy="38" r="2" fill="var(--accent-3)" opacity="0.5"/>
+                <circle cx="36" cy="38" r="2" fill="var(--accent-3)" opacity="0.5"/>
+              </svg>
+            </div>
+            <div class="pillar-number mono">04</div>
+            <h3 class="pillar-title">Multi-Modal Fusion</h3>
+            <p class="pillar-body">Investigate multi-modal fusion concepts (RGB + auxiliary sensing) to improve robustness in difficult visual conditions.</p>
+            <div class="pillar-delta">
+              <span class="delta-label">Robustness Goal</span>
+              <span class="delta-value accent">+25%</span>
+            </div>
+            <div class="pillar-progress-bar" aria-hidden="true">
+              <div class="pillar-progress-fill" style="--target-width: 55%"></div>
+            </div>
+            <div class="pillar-tags">
+              <span class="scope-tag">Thermal</span>
+              <span class="scope-tag">LiDAR Fusion</span>
+              <span class="scope-tag">WiFi Probes</span>
+            </div>
+          </article>
+
+          <article class="pillar-card" role="listitem" tabindex="0" data-pillar="prediction">
+            <div class="pillar-icon-ring">
+              <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                <path d="M8 38 Q18 10 24 24 Q30 38 40 12" stroke="var(--accent-2)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path d="M32 12l8 0 0 8" stroke="var(--accent-2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="pillar-number mono">05</div>
+            <h3 class="pillar-title">Temporal Prediction Engine</h3>
+            <p class="pillar-body">Add time-series forecasting modules to estimate short-term crowd changes and support proactive planning experiments.</p>
+            <div class="pillar-delta">
+              <span class="delta-label">Forecast Horizon</span>
+              <span class="delta-value accent">10-15 min</span>
+            </div>
+            <div class="pillar-progress-bar" aria-hidden="true">
+              <div class="pillar-progress-fill" style="--target-width: 70%"></div>
+            </div>
+            <div class="pillar-tags">
+              <span class="scope-tag">LSTM</span>
+              <span class="scope-tag">Transformer</span>
+              <span class="scope-tag">Time-Series</span>
+            </div>
+          </article>
+
+          <article class="pillar-card" role="listitem" tabindex="0" data-pillar="api">
+            <div class="pillar-icon-ring">
+              <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                <rect x="10" y="10" width="28" height="28" rx="4" stroke="var(--accent)" stroke-width="1.5"/>
+                <path d="M18 20l-4 4 4 4M30 20l4 4-4 4M22 30l4-12" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="pillar-number mono">06</div>
+            <h3 class="pillar-title">Open API &amp; SDK Layer</h3>
+            <p class="pillar-body">Build clean REST + WebSocket interfaces so frontend, backend, and model outputs integrate smoothly in the project demo stack.</p>
+            <div class="pillar-delta">
+              <span class="delta-label">Integration Goal</span>
+              <span class="delta-value accent">Student-friendly</span>
+            </div>
+            <div class="pillar-progress-bar" aria-hidden="true">
+              <div class="pillar-progress-fill" style="--target-width: 85%"></div>
+            </div>
+            <div class="pillar-tags">
+              <span class="scope-tag">REST API</span>
+              <span class="scope-tag">WebSocket</span>
+              <span class="scope-tag">SDK</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="scope-roadmap-section" aria-labelledby="roadmap-heading">
+        <div class="section-label-group">
+          <h2 id="roadmap-heading" class="section-heading-scope">
+            Scalability <span class="gradient-text-scope">Roadmap</span>
+          </h2>
+          <p class="section-sub-scope">Execution track from current prototype to validated academic implementation milestones.</p>
+        </div>
+
+        <div class="roadmap-summary" role="list" aria-label="Roadmap completion summary">
+          <div class="roadmap-summary-item" role="listitem">
+            <span class="summary-key mono">Prototype Phases</span>
+            <strong class="summary-value">4</strong>
+          </div>
+          <div class="roadmap-summary-item" role="listitem">
+            <span class="summary-key mono">Core Modules</span>
+            <strong class="summary-value">6</strong>
+          </div>
+          <div class="roadmap-summary-item" role="listitem">
+            <span class="summary-key mono">Evaluation Scenarios</span>
+            <strong class="summary-value">12+</strong>
+          </div>
+          <div class="roadmap-summary-item" role="listitem">
+            <span class="summary-key mono">Roadmap Span</span>
+            <strong class="summary-value">Multi-phase rollout</strong>
+          </div>
+        </div>
+
+        <div class="roadmap-timeline" role="list">
+          <div class="roadmap-track-line" aria-hidden="true"></div>
+
+          <div class="roadmap-phase" role="listitem" data-phase="1">
+            <div class="phase-node" aria-hidden="true">
+              <span class="phase-node-pulse"></span>
+              <span class="phase-node-dot"></span>
+            </div>
+            <div class="phase-card">
+              <div class="phase-label mono">Phase 01 · Foundation</div>
+              <h3 class="phase-title">Model &amp; Edge Hardening</h3>
+              <ul class="phase-items">
+                <li>EfficientDet upgrade + TensorRT export</li>
+                <li>Deploy on 10 Jetson Orin pilot nodes</li>
+                <li>Accuracy benchmark against ShanghaiTech</li>
+              </ul>
+              <div class="phase-kpi"><span class="mono">Target MAE:</span> <span class="accent">≤ 8.2</span></div>
+            </div>
+          </div>
+
+          <div class="roadmap-phase" role="listitem" data-phase="2">
+            <div class="phase-node" aria-hidden="true">
+              <span class="phase-node-dot"></span>
+            </div>
+            <div class="phase-card">
+              <div class="phase-label mono">Phase 02 · Validation</div>
+              <h3 class="phase-title">City-Scale Rollout</h3>
+              <ul class="phase-items">
+                <li>Federated learning across 3 pilot cities</li>
+                <li>Multi-zone dashboard + alert system</li>
+                <li>Public API v1 launch with documentation</li>
+              </ul>
+              <div class="phase-kpi"><span class="mono">Coverage:</span> <span class="accent">50+ zones/city</span></div>
+            </div>
+          </div>
+
+          <div class="roadmap-phase" role="listitem" data-phase="3">
+            <div class="phase-node" aria-hidden="true">
+              <span class="phase-node-dot"></span>
+            </div>
+            <div class="phase-card">
+              <div class="phase-label mono">Phase 03 · Optimization</div>
+              <h3 class="phase-title">Multi-Modal &amp; Prediction</h3>
+              <ul class="phase-items">
+                <li>Thermal + LiDAR sensor fusion integration</li>
+                <li>LSTM forecasting engine (30-min horizon)</li>
+                <li>Emergency dispatch API integration</li>
+              </ul>
+              <div class="phase-kpi"><span class="mono">Forecast accuracy:</span> <span class="accent">85%</span></div>
+            </div>
+          </div>
+
+          <div class="roadmap-phase" role="listitem" data-phase="4">
+            <div class="phase-node" aria-hidden="true">
+              <span class="phase-node-dot"></span>
+            </div>
+            <div class="phase-card">
+              <div class="phase-label mono">Phase 04 · Deployment</div>
+              <h3 class="phase-title">Global Intelligence Mesh</h3>
+              <ul class="phase-items">
+                <li>Inter-city anomaly pattern transfer</li>
+                <li>UN / WHO disaster response protocol integration</li>
+                <li>Open-source SDK + community contributions</li>
+              </ul>
+              <div class="phase-kpi"><span class="mono">Cities:</span> <span class="accent">24+ worldwide</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="scope-globe-section" aria-labelledby="globe-heading">
+        <div class="section-label-group">
+          <h2 id="globe-heading" class="section-heading-scope">
+            Global <span class="gradient-text-scope">Deployment Mesh</span>
+          </h2>
+          <p class="section-sub-scope">Active and planned nodes across 24 cities — live inference, federated updates.</p>
+        </div>
+        <div class="globe-wrapper">
+          <canvas id="scopeGlobeCanvas" width="900" height="420" aria-label="Animated world map showing deployment mesh nodes"></canvas>
+          <div class="globe-legend">
+            <span class="legend-item"><span class="legend-dot active"></span> Active node</span>
+            <span class="legend-item"><span class="legend-dot planned"></span> Planned</span>
+            <span class="legend-item"><span class="legend-dot research"></span> Research partner</span>
+          </div>
+        </div>
+        <div class="globe-insights" role="list" aria-label="Deployment metrics">
+          <article class="globe-insight-card" role="listitem">
+            <h3 class="globe-insight-title">Live Mesh Sync</h3>
+            <p>Federated gradient exchange cycles run every 12 minutes across active nodes.</p>
+          </article>
+          <article class="globe-insight-card" role="listitem">
+            <h3 class="globe-insight-title">Regional Redundancy</h3>
+            <p>Failover routing keeps inference alive even if a city edge cluster drops.</p>
+          </article>
+          <article class="globe-insight-card" role="listitem">
+            <h3 class="globe-insight-title">Competition Target</h3>
+            <p>Istanbul and Bengaluru research nodes benchmark cross-continental stability.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="scope-domains-section" aria-labelledby="domains-heading">
+        <div class="section-label-group">
+          <h2 id="domains-heading" class="section-heading-scope">
+            Where This <span class="gradient-text-scope">Scales</span>
+          </h2>
+          <p class="section-sub-scope">Application scenarios explored in this academic implementation.</p>
+        </div>
+
+        <div class="domains-grid-scope">
+          <article class="domain-card-scope" tabindex="0" data-domain="cities">
+            <div class="domain-glow-scope"></div>
+            <div class="domain-icon-scope">
+              <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                <path d="M10 44h44M14 44V30h8v14M26 44V22h12v22M42 44V26h8v18" stroke="currentColor" stroke-width="2"/>
+                <circle cx="18" cy="28" r="2" fill="currentColor"/>
+                <circle cx="32" cy="20" r="2" fill="currentColor"/>
+                <circle cx="46" cy="24" r="2" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="domain-content-scope">
+              <div class="domain-badge-scope">Smart Cities</div>
+              <h3>Urban Crowd Intelligence</h3>
+              <p>Real-time monitoring across transit hubs, plazas, and commercial zones for adaptive urban planning.</p>
+              <div class="domain-metrics-scope">
+                <span><strong>12+</strong> scenarios</span>
+                <span><strong>&lt;=60ms</strong> target</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="domain-card-scope" tabindex="0" data-domain="events">
+            <div class="domain-glow-scope"></div>
+            <div class="domain-icon-scope">
+              <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                <path d="M32 8L8 24l24 8 24-8L32 8z" stroke="currentColor" stroke-width="2" fill="none"/>
+                <path d="M8 38l24 8 24-8M8 31l24 8 24-8" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
+              </svg>
+            </div>
+            <div class="domain-content-scope">
+              <div class="domain-badge-scope">Events</div>
+              <h3>Large-Scale Event Safety</h3>
+              <p>Concert, stadium, and festival density management with automatic capacity alerts and flow routing.</p>
+              <div class="domain-metrics-scope">
+                <span><strong>multi-scene</strong> datasets</span>
+                <span><strong>85%</strong> target accuracy</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="domain-card-scope" tabindex="0" data-domain="disaster">
+            <div class="domain-glow-scope"></div>
+            <div class="domain-icon-scope">
+              <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                <path d="M32 10L10 50h44L32 10z" stroke="currentColor" stroke-width="2.5" fill="none"/>
+                <path d="M32 25v15" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="32" cy="45" r="2" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="domain-content-scope">
+              <div class="domain-badge-scope">Disaster Response</div>
+              <h3>Emergency Evacuation AI</h3>
+              <p>Adaptive route optimization and crowd-aware evacuation coordination during disaster events.</p>
+              <div class="domain-metrics-scope">
+                <span><strong>simulation</strong> tested</span>
+                <span><strong>prototype</strong> workflow</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="domain-card-scope" tabindex="0" data-domain="safety">
+            <div class="domain-glow-scope"></div>
+            <div class="domain-icon-scope">
+              <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                <path d="M32 8L12 16v12c0 12 8 22 20 26 12-4 20-14 20-26V16L32 8z" stroke="currentColor" stroke-width="2.5" fill="none"/>
+                <path d="M32 30L44 26" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="domain-content-scope">
+              <div class="domain-badge-scope">Security</div>
+              <h3>Public Safety Intelligence</h3>
+              <p>Anomaly detection, threat prediction, and sub-5-second alert propagation across distributed networks.</p>
+              <div class="domain-metrics-scope">
+                <span><strong>85%</strong> detection goal</span>
+                <span><strong>real-time</strong> alerts</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="scope-compare-section" aria-labelledby="compare-heading">
+        <div class="section-label-group">
+          <h2 id="compare-heading" class="section-heading-scope">
+            Current vs <span class="gradient-text-scope">Target Architecture</span>
+          </h2>
+        </div>
+
+        <div class="compare-grid">
+          <div class="compare-col current">
+            <div class="compare-col-header">
+              <span class="compare-label">Current State</span>
+              <span class="compare-badge badge-current">v1.0</span>
+            </div>
+            <div class="compare-row"><span class="compare-key">Model</span><span class="compare-val mono">CSRNet</span></div>
+            <div class="compare-row"><span class="compare-key">Inference</span><span class="compare-val mono">Cloud GPU</span></div>
+            <div class="compare-row"><span class="compare-key">Latency</span><span class="compare-val mono">~200ms</span></div>
+            <div class="compare-row"><span class="compare-key">Scale</span><span class="compare-val mono">Single city</span></div>
+            <div class="compare-row"><span class="compare-key">Learning</span><span class="compare-val mono">Centralized</span></div>
+            <div class="compare-row"><span class="compare-key">Sensors</span><span class="compare-val mono">RGB only</span></div>
+            <div class="compare-row"><span class="compare-key">Prediction</span><span class="compare-val mono">Reactive</span></div>
+          </div>
+
+          <div class="compare-arrow" aria-hidden="true">
+            <svg viewBox="0 0 80 40" fill="none">
+              <path d="M10 20h60M60 10l10 10-10 10" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="compare-arrow-label mono">upgrade</span>
+          </div>
+
+          <div class="compare-col target">
+            <div class="compare-col-header">
+              <span class="compare-label">Target State</span>
+              <span class="compare-badge badge-target">v3.0</span>
+            </div>
+            <div class="compare-row improved"><span class="compare-key">Model</span><span class="compare-val mono accent">EfficientDet-D4 + Attn</span></div>
+            <div class="compare-row improved"><span class="compare-key">Inference</span><span class="compare-val mono accent">Edge (Jetson Orin)</span></div>
+            <div class="compare-row improved"><span class="compare-key">Latency</span><span class="compare-val mono accent">&lt;= 60ms</span></div>
+            <div class="compare-row improved"><span class="compare-key">Scale</span><span class="compare-val mono accent">multi-scene academic dataset</span></div>
+            <div class="compare-row improved"><span class="compare-key">Learning</span><span class="compare-val mono accent">Federated (privacy)</span></div>
+            <div class="compare-row improved"><span class="compare-key">Sensors</span><span class="compare-val mono accent">RGB + Thermal + LiDAR</span></div>
+            <div class="compare-row improved"><span class="compare-key">Prediction</span><span class="compare-val mono accent">Short-term (10-15 min)</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="scope-tags-enhanced" aria-label="Capability tags">
+        <div class="section-label-group">
+          <h2 class="section-heading-scope">
+            Capability <span class="gradient-text-scope">Cloud</span>
+          </h2>
+        </div>
+        <ul role="list">
+          <li><span class="scope-tag">Multi-Camera Integration</span></li>
+          <li><span class="scope-tag">Edge AI Prototype</span></li>
+          <li><span class="scope-tag">Federated Learning</span></li>
+          <li><span class="scope-tag">Dataset-Based Scaling</span></li>
+          <li><span class="scope-tag">Real-Time Analytics APIs</span></li>
+          <li><span class="scope-tag">Disaster-Ready Routing</span></li>
+          <li><span class="scope-tag">Control Dashboard Prototype</span></li>
+          <li><span class="scope-tag">LSTM Forecasting</span></li>
+          <li><span class="scope-tag">Thermal Fusion</span></li>
+          <li><span class="scope-tag">WebSocket Streaming</span></li>
+          <li><span class="scope-tag">Privacy-Aware Training</span></li>
+          <li><span class="scope-tag">INT8 Quantization</span></li>
+        </ul>
+      </section>
+
+    </div>
+  </section>
+</main>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script defer src="../static/app.js"></script>
+</body>
+</html>
