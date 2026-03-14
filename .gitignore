@@ -27,3 +27,6 @@ Thumbs.db
 
 # Project-specific
 output/
+
+# Generated uploads
+static/uploads/
