@@ -43,6 +43,9 @@ python app.py
 ```
 Then open your browser at `http://127.0.0.1:5000`.
 
+## Demo
+[Demo Video](https://drive.google.com/file/d/1g4GiBJr0MhA6T98b72mfFJCuV2e8DQ-P/view?usp=sharing)
+
 ## Notes
 - `static/uploads/` is generated at runtime and is ignored by Git.
 - Large files (`*.pth`, `*.mp4`) are tracked with Git LFS.
